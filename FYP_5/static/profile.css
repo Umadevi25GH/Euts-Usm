@@ -1,0 +1,43 @@
+
+.container-sm{
+    width: 50%;
+    height: 75%;
+    margin-top: 5%;
+}
+.container-sm .rounded{
+    border-radius:.50rem;
+
+}
+
+.profile-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 10%;
+}
+
+.profile-card-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-card-top img {
+  max-width: 40%;
+  max-height: auto;
+  margin-right: 1%;
+}
+
+.profile-card-info h5 {
+    margin-bottom: 0;
+}
+
+.profile-card-body span {
+    display: block;
+}
+
+.profile-card-body span:first-child {
+    margin-top: 5px;
+}
+
+.profile-card-body a {
+    margin-top: 20px;
+}

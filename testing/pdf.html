@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PDFTron WebViewer Example</title>
+    <style>
+      #viewer {
+        width: 100%;
+        height: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdftron-webviewer/7.3.3/webviewer.min.js"></script>
+    <script>
+        // Fetch the PDF URL from your backend or any other source
+        const pdfUrl = '.\FYP_5\testing\Milestone 1-Test plan.pdf';
+        fetch('URL_ENDPOINT')
+            .then(response => response.text())
+            .then(pdfUrl => {
+            WebViewer({
+                path: 'path/to/webviewer',
+                initialDoc: pdfUrl,
+                config: {
+                disablePrint: true, // Disable printing
+                disableDownload: true, // Disable downloading
+                },
+            }, document.getElementById('viewer'));
+            })
+            .catch(error => {
+            console.error('Error fetching PDF URL:', error);
+            });
+    </script>
+  </body>
+</html>

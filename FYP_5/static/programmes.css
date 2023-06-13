@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&family=Updock&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+html{
+    scroll-behavior: smooth;
+}
+
+
+.modal-content{
+    background-color: #f7f7f8;
+    color:#050505;
+}
+
+.project-container{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    /* width: 33.33%; */
+}
+
+.project-details-container {
+    border: 1px solid #ec1919;
+}
+
+.container-project{
+    display: flex;
+    flex-direction: row;
+}
+
+.container-md{
+    display: flex;
+    flex-direction: row;
+}
+
+/*Image slider for projects see more start*/
+
+/*Image slider for projects see more end*/
+

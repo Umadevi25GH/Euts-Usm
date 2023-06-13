@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <!-- Fontawesome CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/FYP_5/static/Home.css">
+    <link rel="stylesheet" href="/FYP_5/static/resources.css">
+    <!-- SMTPjs -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW8L099ZC4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JW8L099ZC4');
+</script>
+<!-- <nav class="navbar fixed-top">
+<div class="container navigation">
+    <a class="navbar-brand" href="#">
+        <img src="/FYP_5/static/logoBnW (1).png" alt="" width="60" height="45">
+    </a>
+    <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+    <ul class = "nav nav-pills ms-auto">
+        <li class="nav-item">
+            <a href="#" class="nav-link text" id="nav-link-profile">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" aria-current="page" class="nav-link text" id="nav-link-resources">Resources</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link text" id="nav-link-programmes">Programmes</a>
+        <li class="nav-item">
+            <a href="/FYP_5/templates/AEmployeeList.html" aria-current="page" class="nav-link active1 text" id="nav-link-employees">Employee Management</a>
+        </li>
+        <li class="nav-item">
+            <a href="/FYP_5/templates/Home.html" class="nav-link text" id="nav-link-logout">Logout</a>
+        </li>
+    </ul>
+</div>
+</nav> -->
+
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+        <a class="navbar-brand" href="#">
+        <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW" width="60" height="45">
+        </a>
+        <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+        <ul class = "nav nav-pills ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link text" id="nav-link-profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" aria-current="page" class="nav-link text" id="nav-link-resources">Resources</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text" id="nav-link-programmes">Programmes</a>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/AEmployeeList.html" aria-current="page" class="nav-link active1 text" id="nav-link-employees">Employee Management</a>
+            </li>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/Home.html" class="nav-link text" id="nav-link-logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</header><!-- End Header -->
+<body>
+    <!-- <div class="container">
+    <h1>Employee Management</h1>
+
+    <table id="employeeTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="name2">John Doe</td>
+            <td id="eid">1</td>
+            <td id="role">Developer</td>
+            <td>
+            <button class="btn btn-primary btn-sm editBtn">Edit</button>
+            <button class="btn btn-danger btn-sm removeBtn">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>2</td>
+            <td>Manager</td>
+            <td>
+            <button class="btn btn-primary btn-sm editBtn">Edit</button>
+            <button class="btn btn-danger btn-sm removeBtn">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Add Employee</h2>
+        <td><button type="button" class="btn1 add-emp" onclick="location.href='ACreateEmployee.html'">Add New Employee</button></td>
+    </div> -->
+
+<!--new dynamic employee listing start-->
+<div class="container-fluid col-lg-10">
+    <div class="container-project my-5 px-3 py-5 row mt-5">
+        <h1 class="mb-0 pb-0">Employees Management</h1>
+        <h6> Below are latest list of active employees</h6>
+    
+    <table id="employeeTable" class="table table-striped my-5 px-5 py-5">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="tbody2"></tbody>
+    </table>
+    </div>
+    <div class="container-project px-3">
+        <button type="button" class="btn1 add-col" data-bs-toggle="modal" data-bs-target="#emp-modal">Add New Employee</button>
+    </div>
+    <div class="container-project px-3">
+        <button type="button" class="btn1 show-inactive" data-bs-toggle="modal" data-bs-target="#emp-Inactive">Show Inactive Employee</button>
+    </div>
+    
+    <div id="employeeCards"></div>
+</div>
+<!--new dynamic employee listing end-->
+
+
+
+<!-- update existing employees start  -->
+<div class="modal fade" id="empUpdate-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="file-modal-label">Update Existing User : HTML</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-user-form" class="needs-validation" novalidate>
+                    <div class="row" id="page-1">
+                    <div class="col-lg-12">
+                        <h5>Step 1: Personal Information</h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="first-name">Employee Name</label>
+                        <input type="text" class="form-control" id="update-first-name" placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="emp-id">Employee ID</label>
+                        <input type="text" class="form-control" id="update-emp-id" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-gender" class="form-label">Employee Gender</label>
+                        <select class="form-control" id="update-employee-gender" required>
+                            <option id="male">Male</option>
+                            <option id="female">Female</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-age" class="form-label">Employee Age</label>
+                        <input type="number" class="form-control" id="update-employee-age" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-mstatus" class="form-label">Employee Marital Status</label>
+                        <select class="form-control" id="update-employee-mstatus" required>
+                            <option id="single">Single</option>
+                            <option id="married">Married</option>
+                            <option id="other">Other</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-race" class="form-label">Employee Race</label>
+                        <select class="form-control" id="update-employee-race" required>
+                            <option id="malay">Malay</option>
+                            <option id="chinese">Chinese</option>
+                            <option id="indian">Indian</option>
+                            <option id="otherR">Other</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-nationality" class="form-label">Employee Nationality</label>
+                        <input type="text" class="form-control" id="update-employee-nationality" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-education" class="form-label">Employee Highest Education Level</label>
+                        <select class="form-control" id="update-employee-education" required>
+                            <option id="diploma">Diploma</option>
+                            <option id="degree">Bachelor's Degree</option>
+                            <option id="master">Master</option>
+                            <option id="phd">Phd</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row" id="page-2">
+                    <div class="col-lg-12">
+                        <h5>Step 2: Account Information</h5>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="text" class="form-control" id="update-email" disabled>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="update-password" autocomplete="on" disabled>
+                        </div>
+                    </div> -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="estatus">Employee Status</label>
+                        <select class="form-control" id="update-estatus" required>
+                            <option id="active">Active</option>
+                            <option id="inactive">Inactive</option>
+                        </select>                        
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                         <!-- chnage to radio button   -->
+                        <label for="role">Role</label>
+                        <select class="form-control" id="update-role" required>
+                            <option id="admin">Admin</option>
+                            <option id="director">Director</option>
+                            <option id="manager">Manager</option>
+                            <option id="srexecutive">Senior Executive</option>
+                            <option id="executive">Executive</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row" id="page-3">
+                    <div class="col-lg-12">
+                        <h5>Step 3: Confirmation</h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <h5>Please be noted the information provided must be correct. Click <strong><em>"Update User"</em></strong> to submit.</h5>
+                    </div>
+                    </div> <br/>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn1" id="prev-btn-u" disabled>Previous</button>
+                        <button type="button" class="btn1" id="next-btn-u">Next</button>
+                        <button type="submit" class="btn1" id="updateUser" style="display: none;" >Update User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- update existing employees end  -->
+
+
+<!-- add new employees start -->
+<div class="modal fade" id="emp-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="file-modal-label">Create New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="create-user-form" class="needs-validation" novalidate>
+                    <div class="row" id="step-1">
+                    <div class="col-lg-12">
+                        <h5>Step 1: Personal Information</h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="first-name">Employee Name</label>
+                        <input type="text" class="form-control text-uppercase" id="first-name" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="emp-id">Employee ID</label>
+                        <input type="text" class="form-control" id="emp-id" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-gender" class="form-label">Employee Gender</label>
+                        <select class="form-control" id="employee-gender" required>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-age" class="form-label">Employee Age</label>
+                        <input type="number" class="form-control" id="employee-age" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-mstatus" class="form-label">Employee Marital Status</label>
+                        <select class="form-control" id="employee-mstatus" required>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Other</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-race" class="form-label">Employee Race</label>
+                        <select class="form-control" id="employee-race" required>
+                            <option>Malay</option>
+                            <option>Chinese</option>
+                            <option>Indian</option>
+                            <option>Other</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-nationality" class="form-label">Employee Nationality</label>
+                        <input type="text" class="form-control text-uppercase" id="employee-nationality" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                        <label for="employee-education" class="form-label">Employee Highest Education Level</label>
+                        <select class="form-control" id="employee-education" required>
+                            <option>Diploma</option>
+                            <option>Bachelor's Degree</option>
+                            <option>Master</option>
+                            <option>Phd</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row" id="step-2">
+                    <div class="col-lg-12">
+                        <h5>Step 2: Account Information</h5>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" autocomplete="on" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label for="estatus">Employee Status</label>
+                        <select class="form-control" id="estatus2" required>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <!-- chnage to radio button -->
+                        <label for="role">Role</label>
+                        <select class="form-control" id="role" required>
+                            <option>Admin</option>
+                            <option>Director</option>
+                            <option>Manager</option>
+                            <option>Senior Executive</option>
+                            <option>Executive</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row" id="step-3">
+                    <div class="col-lg-12">
+                        <h5>Step 3: Confirmation</h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <h5>Please be noted the information provided must be correct. Click <strong><em>"Create User"</em></strong> to submit.</h5>
+                    </div>
+                    </div> <br/>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn1" id="prev-btn" disabled>Previous</button>
+                        <button type="button" class="btn1" id="next-btn">Next</button>
+                        <button type="submit" class="btn1" id="addUser" style="display: none;" >Create User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add new employees end -->
+
+<!-- show inactive employees start -->
+<!-- Modal -->
+<div class="modal fade" id="emp-Inactive" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="employeeModalLabel">Inactive Employees</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inactiveTableBody">
+              <!-- Table rows will be dynamically added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- show inactive employees end -->
+
+
+
+
+
+<!-- <div class="b-example-divider"></div>
+<footer class="text-white py-4">
+<div class="container footer1">
+    <div class="row footer1">
+    <div class="col-md-7">
+        <img src="/FYP_5/static/logoBnW (6).png" alt="Your Company Logo" class="img-fluid" width="100">
+    </div>
+    <div class="col-md-4 text-center">
+        <p>&copy; EUTS <?php echo date("Y"); ?>. All Rights Reserved.</p>
+    </div>
+    </div>
+</div>
+</footer>  -->
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+                <h3>Employee Upskilling Training System</h3>
+                <p>
+                EUTS Group <br>
+                11800, Penang<br><br>
+                <strong>Phone:</strong> +04 12345678<br>
+                <strong>Email:</strong> eutsusm@gmail.com<br>
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+        &copy; Copyright <strong><span>Employee Upskilling Training System</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+        Designed by <a href="https://github.com/Umadevi25GH">STU</a>
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+
+<!-- <script src="https://www.gstatic.com/firebasejs/9.17.0/firebase-firestore.js"></script> -->
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<!-- <script src="/ElasticEmail.WebApiClient-js-master/ElasticEmail.WebApiClient-js-master/ElasticEmailClient.js"></script> -->
+<!-- <script src="path/to/axios.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module" src="/FYP_5/static/AEmployeeList.js"></script>
+<!-- <script type="text/javascript" src="/FYP_5/static/AEmployeeList.js"></script> -->
+</body>
+</html>

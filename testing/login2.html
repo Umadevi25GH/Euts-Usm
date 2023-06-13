@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EUTS Login Form</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/FYP_5/static/Home.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <!-- <link rel="stylesheet" href="/FYP_5/static/login.css"> -->
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW8L099ZC4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JW8L099ZC4');
+</script>
+
+<nav class="navbar fixed-top">
+    <div class="container navigation">
+        <a class="navbar-brand" href="#">
+            <img src="/FYP_5/static/logoBnW (1).png" alt="" width="60" height="45">
+        </a>
+        <ul class = "nav nav-pills ms-auto">
+            <li class="nav-item">
+                <a class="nav-link text"  href="/FYP_5/templates/Home.html" id="nav-link-home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active1 text" aria-current="page" href="/FYP_5/templates/login2.html" id="nav-link-login">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<body>
+    <section class="vh-100" style="background-color: #c5cff1;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem; background-color: aliceblue;">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-5 d-none d-md-block">
+                      <img src="/FYP_5/static/logoBnW (6).png"
+                        alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        <h4> Welcome to Employee Upskilling Training System </h4>
+                    </div>
+                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5 text-black">
+                            <form class="needs-validation" novalidate>
+                                <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="email" class="form-control form-control-lg" />
+                                    <label class="form-label" for="email">Email address</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="password" class="form-control form-control-lg" autocomplete="on" />
+                                    <label class="form-label" for="password">Password</label>
+                                </div>
+                                <div class="pt-1 mb-4">
+                                    <button class="btn1" type="button" id="login">Login</button>
+                                </div>
+                                <!-- Button trigger modal -->
+                                <a href="#!" class="small text-muted" data-bs-toggle="modal" data-bs-target="#forget-password-modal">
+                                    Forgot Password
+                                </a>
+                                <p class="mb-5 pb-lg-2" data-bs-toggle="modal" data-bs-target="#newAcc-modal" style="color: #393f81;">Don't have an account? <a href="#!"
+                                    style="color: #393f81;">Contact Admin</a>
+                                </p>
+                                <a href="#!" class="small text-muted">Terms of use.</a>
+                                <a href="#!" class="small text-muted">Privacy policy</a>
+                            </form>
+                        </div> 
+                    </div>
+
+                </div> 
+                </div> 
+            </div>
+            </div>
+        </div>
+        <!-- request new account start -->
+        <div class="modal fade" id="newAcc-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="file-modal-label">Request for Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <form id="request-user-form" action="https://formsubmit.co/1c720d65e6059175945057533d685a47"  method="POST"> -->
+                        <form id="request-user-form" class="needs-validation" novalidate>
+                            <div class="col-lg-12">
+                                <h5>Account Information</h5>
+                            </div>
+                            <!-- <input type="hidden" name="subject" value="Request to gain access to EUTS Systemt"> -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" id="emailR" required>
+                                </div>
+                            </div>
+                            <!-- <input type="hidden" name="email" value=e > -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                <label for="emp-id">Employee ID</label>
+                                <input type="number" class="form-control" id="emp-idR" required>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6">
+                                <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="passwordR" autocomplete="on" required>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                <label for="message">Message</label>
+                                <input type="text" class="form-control" id="messageR" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                <!-- chnage to radio button -->
+                                <label for="role">Role</label>
+                                <select class="form-control" id="roleR" required>
+                                    <option>Director</option>
+                                    <option>Manager</option>
+                                    <option>Senior Executive</option>
+                                    <option>Executive</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn1" id="reqUser" >Submit Request</button>
+                            </div>
+                            <!-- <div id="thank_you" style="display: none;">
+                                <p>Thanks for filling up the form!</p>
+                            </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- request new account end -->
+    </section>
+
+
+
+<!-- Forget Password Modal -->
+<div class="modal fade" id="forget-password-modal" tabindex="-1" aria-labelledby="forget-password-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="forget-password-modalLabel">Forget Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form id="forget-password-form">
+            <div class="mb-3">
+            <label for="emailf" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="resetEmail" name="emailf" required>
+            </div>
+            <div class="mb-3">
+            <label for="employee-id" class="form-label">Employee ID</label>
+            <input type="text" class="form-control" id="Femployee-id" name="employee-id" required>
+            </div>
+            <button id="reset" type="submit" class="btn1">Request Password Reset</button>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- don't have account Modal -->
+<div class="modal fade" id="no-account-modal" tabindex="-1" aria-labelledby="no-account-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="no-account-modalLabel">Contact Admin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form id="no-account-form">
+            <div class="mb-3">
+            <label for="emailNA" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailNA" name="emailNA" required>
+            </div>
+            <div class="mb-3">
+            <label for="employee-id" class="form-label">Employee ID</label>
+            <input type="text" class="form-control" id="employee-id" name="employee-id" required>
+            </div>
+            <button id="newACC" type="submit" class="btn1">Send request</button>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="b-example-divider"></div>
+<footer class="text-white py-3">
+<div class="container footer1">
+    <div class="row footer1">
+    <div class="col-md-7">
+        <img src="/FYP_5/static/logoBnW (6).png" alt="Your Company Logo" class="img-fluid" width="100">
+    </div>
+    <div class="col-md-4 text-center">
+        <p>&copy; EUTS <?php echo date("Y"); ?>. All Rights Reserved.</p>
+    </div>
+    </div>
+</div>
+</footer>
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<!-- <script src="/ElasticEmail.WebApiClient-js-master/ElasticEmail.WebApiClient-js-master/ElasticEmailClient.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src="/FYP_5/static/login.js"></script>
+</body>
+</html>

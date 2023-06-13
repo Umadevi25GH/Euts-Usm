@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: 'Calibri', sans-serif;
+    background: rgb(249, 243, 246);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+  /* Style the modal to cover the entire viewport */
+  /* .modal-dialog {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Adjust the modal content size and position */
+  /* .modal-content {
+    height: 100%;
+    border: none;
+    border-radius: 0;
+  }  */
+  
+  /* Set the PDF viewer to fill the modal content */
+
+  /* .pdf-overlay {
+    position: relative;
+    width: 70%;
+    height: 50vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+  
+  /* .pdf-overlay iframe {
+    width: 90%;
+    height: 100vh;
+    border: none;
+    align-items: center;
+    justify-content: center;
+  } */
+  /* #pdfViewerContainer{
+    justify-content: center;
+    width: 90%;
+    height: 100vh;
+    border: solid 1px;
+  } */
+  #pdfViewer1::before{
+    justify-content: center;
+    width: 90%;
+    height: 100vh;
+    border: solid 1px;
+    z-index: 999;
+    pointer-events: none;
+    /* content: ""; */
+    position: absolute;
+  }
+  /* .pdf-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    pointer-events: none;
+  } */

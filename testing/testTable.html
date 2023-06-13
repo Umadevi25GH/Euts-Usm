@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Table with File Upload</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container w-75">
+      <h1>Dynamic Table with File Upload</h1>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Document ID</th>
+            <th>Document Name</th>
+            <th>Document URL</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td><input type="text" class="form-control" name="attribute"></td>
+            <td><input type="text" class="form-control" name="document-id"></td>
+            <td><input type="text" class="form-control" name="document-name"></td>
+            <td><input type="text" class="form-control" name="document-url"></td>
+            <td><button type="button" class="btn btn-primary add-row" data-bs-toggle="modal" data-bs-target="#file-modal">Add File</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- File Modal -->
+    <div class="modal fade" id="file-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="file-modal-label">Upload File</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="file" id="file-input" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="upload-button">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script src="/testing/testTable.js">
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Programmes Admin</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/FYP_5/static/Home.css">
+    <link rel="stylesheet" href="/FYP_5/static/programmes.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW8L099ZC4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JW8L099ZC4');
+</script>
+
+<!-- 
+<nav class="navbar fixed-top">
+    <div class="container navigation">
+        <a class="navbar-brand" href="#">
+            <img src="/FYP_5/static/logoBnW (1).png" alt="" width="60" height="45">
+        </a>
+        <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+        <ul class = "nav nav-pills ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link text" id="nav-link-profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text" id="nav-link-resources">Resources</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active1 text" aria-current="page" id="nav-link-programmes">Programmes</a>
+            </li>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/AEmployeeList.html" class="nav-link text" id="nav-link-employees">Employees Management</a>
+            </li>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/Home.html" class="nav-link text" id="nav-link-logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav> -->
+
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+        <a class="navbar-brand" href="#">
+        <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW" width="60" height="45">
+        </a>
+        <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+        <ul class = "nav nav-pills ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link text" id="nav-link-profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" aria-current="page" class="nav-link text" id="nav-link-resources">Resources</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" aria-current="page" class="nav-link active1 text" id="nav-link-programmes">Programmes</a>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/AEmployeeList.html" aria-current="page" class="nav-link text" id="nav-link-employees">Employee Management</a>
+            </li>
+            <li class="nav-item">
+                <a href="/FYP_5/templates/Home.html" class="nav-link text" id="nav-link-logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</header><!-- End Header -->
+
+<body>
+
+<!--new dynamic programme start-->
+<div class="container-fluid col-lg-10">
+    <div class="container-project my-5 px-3 py-5 row mt-5">
+        <h1 class="mb-0 pb-0">Programmes</h1>
+        <h6> Below are latest list of training programmes available</h6>
+    </div>
+    <!-- my-5 px-3 py-5 -->
+    <div class="container-project my-5 px-5 col mt-5">
+        <div class="row" id="programCards"></div>
+    </div>
+    <div class="container-project px-1">
+        <button type="button" class="btn1 add-col" data-bs-toggle="modal" data-bs-target="#prog-modal">Add New Programme</button>
+    </div>
+</div>
+<!--new dynamic programme end-->
+
+
+<!-- modal for programmes -->
+<!-- created in Js -->
+<!-- modal for programmes -->
+
+<!-- add new programmes start -->
+<div class="modal fade" id="prog-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="file-modal-label">Add New Programme</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="program-form">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-title">Title</label>
+                        <input type="text" class="form-control text-uppercase" id="prog-title" required>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-category" class="form-label">Programme category</label>
+                        <select class="form-control" id="prog-category" required>
+                        <option>IT</option>
+                        <option>HRM</option>
+                        <option>Finance</option>
+                        <option>Production</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-introduction">Programme Introduction</label>
+                        <input type="text" class="form-control" id="prog-introduction" required>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-description">Programme Description</label>
+                        <input type="text" class="form-control" id="prog-description" required>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-image">Programme Image</label></br>
+                        <!-- <label type="image" class="form-control" id="prog-image" required></label> -->
+                        <label type="text" id="namebox"></label>
+                        <label id="extlab"></label>
+                    </div>
+                    <button type="button" class="btn1 btn-sm mt-3" id="uploadPBtn">Upload Picture</button>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-start">Start Date</label>
+                        <input type="date" class="form-control" id="prog-start" required>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prog-end">End date</label>
+                        <input type="date" class="form-control" id="prog-end" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="submit" class="btn1" id="choose-button">Choose</button> -->
+            <button type="submit" class="btn1" id="addP-button">Save</button>
+            <button type="button" class="btn1" data-bs-dismiss="modal">Cancel</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- add new programmes end -->
+
+
+
+<!-- Button to trigger the add modal start-->
+<button id="addProgBtn" type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#addProg">
+</button>
+<!-- Modal -->
+<div class="modal fade" id="addProg" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+            Thank you for adding new programme to the system.
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Button to trigger the add modal end-->
+
+
+<!-- Button to trigger the apply modal start-->
+<button id="applyProgBtn" type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#applyProg">
+</button>
+<!-- Modal -->
+<div class="modal fade" id="applyProg" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+            All the best! The programme has been added to profile.
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Button to trigger the apply modal end-->
+
+
+
+
+
+<!-- footer
+<div class="b-example-divider"></div>
+<footer class="text-white py-3">
+    <div class="container footer1">
+    <div class="row footer1">
+        <div class="col-md-7">
+        <img src="/FYP_5/static/logoBnW (6).png" alt="Your Company Logo" class="img-fluid" width="100">
+        </div>
+        <div class="col-md-4 text-center">
+        <p>&copy; EUTS <?php echo date("Y"); ?>. All Rights Reserved.</p>
+        </div>
+    </div>
+    </div>
+</footer> -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+  
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Employee Upskilling Training System</h3>
+              <p>
+                EUTS Group <br>
+                11800, Penang<br><br>
+                <strong>Phone:</strong> +04 12345678<br>
+                <strong>Email:</strong> eutsusm@gmail.com<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Employee Upskilling Training System</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+        Designed by <a href="https://github.com/Umadevi25GH">STU</a>
+      </div>
+    </div>
+</footer><!-- End Footer -->
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src="/FYP_5/static/Aprogrammes.js"></script>
+</body>
+</html>

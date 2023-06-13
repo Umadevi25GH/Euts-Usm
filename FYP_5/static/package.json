@@ -1,0 +1,17 @@
+{
+  "name": "fyp_5",
+  "version": "1.0.0",
+  "description": "EUTS",
+  "main": "index.js",
+
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^11.8.0"
+  },
+
+  "scripts": {
+    "start": "node AEmployeeList.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

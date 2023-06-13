@@ -1,0 +1,23 @@
+#step-2,
+#step-3 {
+  display: none;
+}
+
+.card-header {
+  margin-top: 1%;
+}
+
+.card {
+  padding: 0%;
+  background: #e5f2f9;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* margin-bottom: 15%; */
+  margin-top: 15%;
+  border-radius: 15px;
+}
+
+::before,::after{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
