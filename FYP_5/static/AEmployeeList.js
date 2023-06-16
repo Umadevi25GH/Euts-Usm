@@ -162,7 +162,7 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
         empList.push([name, emp_id, role, estatus]);
         // console.log(empList);
         td0.innerHTML = ++empNo;
-        td1.innerHTML = name;
+        td1.innerHTML = name.toUpperCase();
         td2.innerHTML = emp_id;
         td3.innerHTML = role;
         td4.innerHTML = estatus;
@@ -181,17 +181,18 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
         // ControlDiv.innerHTML = `<button type="button" class="btn1 my-2 ml-2 editBtn" id='${docid}' > Edit </button>`;
         // ControlDiv.innerHTML += `<button type="button" class="btn1 my-2 ml-2 delBtn" id='${docid}' > Remove </button>`;
         
-        ControlDiv.innerHTML = `<i type="button" class="fa fa-pencil my-2 ml-2 viewBtn" id='${docid}' ></i>`;
+        ControlDiv.innerHTML = `<i type="button" class="fa fa-pencil my-2 ml-2 editBtn" id='${docid}' ></i>`;
         // ControlDiv.innerHTML += `<i type="button" class="fa fa-trash-alt my-2 ml-2 delBtn" id='${docid}' ></i>`;
 
         // console.log(ControlDiv);
 
         trow.appendChild(ControlDiv);
         tbody2.appendChild(trow);
+        // buttonListener(docid,ControlDiv,empList);
     }
     else
     {
-        var iempNo = 0;
+        // var iempNo = 0;
         var trow = document.createElement("tr");
         var td0 = document.createElement("td");
         var td1 = document.createElement("td");
@@ -200,13 +201,13 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
         // var td4 = document.createElement("td");
 
         // console.log(empList);
-        td0.innerHTML = ++iempNo;
-        td1.innerHTML = name;
+        // td0.innerHTML = ++iempNo;
+        td1.innerHTML = name.toUpperCase();
         td2.innerHTML = email;
         td3.innerHTML = estatus;
         // td4.innerHTML = estatus;
 
-        trow.appendChild(td0);
+        // trow.appendChild(td0);
         trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
@@ -219,10 +220,10 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
 
         trow.appendChild(ControlDiv);
         tbody3.appendChild(trow);
+        // buttonListener(docid,ControlDiv,empList);
     }
-    
-    buttonListener(docid,ControlDiv,empList);
     // buttonListenerDel(docid);
+    buttonListener(docid,ControlDiv,empList);
 }
 // show inactive employees
 

@@ -119,7 +119,51 @@ reqUser?.addEventListener("click", function(){
   });
 });
 
-// New account link end
+// Request to activate account link start
+
+// show step of the Create button start
+// const formR = document.getElementById('request-user-form');
+
+// formR.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   // Handle form submission here
+// });
+
+// const reqUser = document.getElementById('reqUser');
+// reqUser?.addEventListener("click", function(){
+//   // Show thank you message element
+//   // document.getElementById('thank_you').style.display = 'block';
+//   var email = document.getElementById('emailR').value;
+//   var emp_id = document.getElementById('emp-idR').value;
+//   var role = document.getElementById('roleR').value;
+//   var message = document.getElementById('messageR').value;
+
+//   //send email notification start
+//   // Create a new email message
+//   //security token: b4c1629a-689f-49b0-a47a-502594770ede
+//   Email.send({
+//       SecureToken : "b4c1629a-689f-49b0-a47a-502594770ede",
+//       To : "eutsusm@gmail.com",
+//       From : email,
+//       Subject : "Request to check access to EUTS System",
+//       Body : `Please check access to the EUTS system for the following user: ${email} , Employee ID: ${emp_id}
+//       Role: ${role}    
+//       Message: ${message}`,
+//   }).then((message) => {
+//     alert(message);
+//     window.location = "Home.html";
+//   })
+//   .catch((error) => {
+//   // Handle the error here
+//     console.error("Error sending email:", error);
+//   // Additional error handling or notification logic can be added here
+//   });
+// });
+
+// Request to activate account link end
+
+
+
 (function() {
     "use strict";
   

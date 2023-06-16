@@ -272,6 +272,11 @@ upBtn.addEventListener('click',function(){
         return;
     }
 
+    if(!ValidateFileType()){
+        alert("Only PDF files are allowed");
+        return;
+    }
+
     const metaData = {
         contentType: pdfToUpload.type,
     };
@@ -316,6 +321,19 @@ upBtn.addEventListener('click',function(){
         var regex = /[\#$\[\]]/
         return !(regex.test(namebox.value));
     }
+
+    function ValidateFileType() {
+        // Allowing file type
+        var allowedExtensions = /(\.pdf)$/i;
+        
+        return !(allowedExtensions.test(extlab.value));
+    }
+        // if (!allowedExtensions.exec(filePath)) {
+        //     alert('Invalid file type');
+        //     fileInput.value = '';
+        //     return false;
+        // }
+    
 
 //
     async function SaveURLtoFirestore(encryptedURL, uid, secretKeyString){
