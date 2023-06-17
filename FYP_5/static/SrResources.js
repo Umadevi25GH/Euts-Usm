@@ -209,13 +209,27 @@ chooseBtn.addEventListener('click',function(){
 
     input.onchange = e => {
     files = e.target.files;
-    var extention = GetFileExt(files[0]);
     var name = GetFileName(files[0]);
-    namebox.value = name;
-    extlab.innerHTML = extention;
+    var extention = GetFileExt(files[0]);
+    if (extention != ".pdf") {
+        alert("Please Upload PDF files only");
+        window.location.reload();
+        return;
+    }
+    else{
+        namebox.value = name;
+        extlab.innerHTML = extention;
+    }
 
     reader.readAsDataURL(files[0]);
     }
+
+    // if(!ValidateFileType())
+    // {
+    //     alert("Please Upload PDF files only");
+    //     window.location.reload();
+    //     return;
+    // }
 
     function GetFileExt(file)
     {
@@ -227,11 +241,12 @@ chooseBtn.addEventListener('click',function(){
 
     function GetFileName(file)
     {
-        alert("masuk getfilename");
+        // alert("masuk getfilename");
         var temp = file.name.split('.');
         var fname = temp.slice(0,-1).join('.');
         return fname;
     }
+
     input.click();
 });
 
@@ -293,6 +308,13 @@ upBtn.addEventListener('click',function(){
         var regex = /[\#$\[\]]/
         return !(regex.test(namebox.value));
     }
+
+    function ValidateFileType(ext) {
+        // Allowing file type
+        var allowedExtensions = /\.pdf$/;
+        return allowedExtensions.test(extlab.value);
+    }
+    
 
 
     async function SaveURLtoFirestore(encryptedURL, uid, secretKeyString){

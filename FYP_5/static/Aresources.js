@@ -235,11 +235,20 @@ chooseBtn.addEventListener('click',function(){
     files = e.target.files;
     var extention = GetFileExt(files[0]);
     var name = GetFileName(files[0]);
-    namebox.value = name;
-    extlab.innerHTML = extention;
-
+    if (extention != ".pdf") {
+        alert("Please Upload PDF files only");
+        window.location.reload();
+        return;
+    }
+    else{
+        namebox.value = name;
+        extlab.innerHTML = extention;
+    }
+        
     reader.readAsDataURL(files[0]);
     }
+
+    
 
     function GetFileExt(file)
     {
