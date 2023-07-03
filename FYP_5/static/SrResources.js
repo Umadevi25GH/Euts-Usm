@@ -263,10 +263,11 @@ upBtn.addEventListener('click',function(){
         alert('pdf file name cannot contain "#", "$", "[", ",]"');
         return;
     }
-
+    
     const metaData = {
         contentType: pdfToUpload.type,
     };
+    
 
     // alert("masuk upload1");
     const storageRef = sRef(storage, "pdf/"+pdfName);
@@ -383,7 +384,7 @@ function buttonListener(docid,ControlDiv){
                     e.preventDefault();
                     }
                 });
-  
+                
                 modal.show();
             }
             else {

@@ -1,3 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi Testing PDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf_viewer.min.css" integrity="sha512-Pb+a14FJsB9HcCQSZAof/bRsYnADz8d9IeOgIOHpYBS4fwoI3PnMU41augGQ4ugYFTb90X93Su35iJT9tj/tpw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/web/pdf_viewer.js"></script>
+</head>
+<body>
+    <div id="pdfContainer"></div>
+
+    <script>
+        const pdfUrl = "https://firebasestorage.googleapis.com/v0/b/euts-1ca62.appspot.com/o/pdf%2FCYBER%20SECURITY%20(R18A0521).pdf?alt=media&token=ca354ea5-048b-474f-aa2d-232b40c10978";
+        const container = document.getElementById("pdfContainer");
+
+        // Set the workerSrc property with the correct path to pdf.worker.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+        // Load the PDF using the PDF.js viewer
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+          const pdfViewer = new PDFViewer({
+            container: container
+          });
+          pdfViewer.setDocument(pdf);
+          // Add event listeners for download and print events
+          pdfViewer.eventBus.on("download", function () {
+            // Download event captured
+            console.log("Download clicked");
+            // Add your code here to handle the download event
+          });
+
+          pdfViewer.eventBus.on("print", function () {
+            // Print event captured
+            console.log("Print clicked");
+            // Add your code here to handle the print event
+          });
+        });
+    </script>
+</body>
+</html>
+
+
+
 <!-- <div class="container-sm rounded">
             <div class="col-sm-8">
                 <div class="profile-card">
@@ -50,3 +95,4 @@
             </div>
         </div> 
     </div> -->
+
