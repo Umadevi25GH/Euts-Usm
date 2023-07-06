@@ -42,30 +42,7 @@ async function displayEmp(currentUser){
     AddAllItemsToTheTable(pdf);
 }
 
-// onAuthStateChanged(auth, async (user) => {
-//     if (user) {
 
-//         const uid = user.uid;
-//         // alert(uid);
-//         const docRef=doc(db, "employees", uid);
-//         const docSnap = await getDoc(docRef);
-
-//         if (docSnap.exists()) {
-//             document.getElementById("name1").innerText = docSnap.data().name;
-//         }
-//       // User is signed in, see docs for a list of available properties
-//       // https://firebase.google.com/docs/reference/js/firebase.User
-//         var pdf = [];
-
-//         const querySnapshot = await getDocs(collection(db, "pdf"));
-//         querySnapshot.forEach(async (doc) => {
-//             pdf.push(doc);
-//             console.log(pdf);
-//             console.log(doc.id, " => ", doc.data());
-//         });
-//         console.log(pdf);
-//         AddAllItemsToTheTable(pdf);
-//     }
     
 var resources = document.getElementById("nav-link-resources");
 resources.addEventListener('click', async ()=>{
@@ -254,13 +231,13 @@ chooseBtn.addEventListener('click',function(){
     {
         var temp = file.name.split('.');
         var ext = temp.slice((temp.length - 1), (temp.length));
-        alert(ext);
+        // alert(ext);
         return '.' + ext[0];
     }
 
     function GetFileName(file)
     {
-        alert("masuk getfilename");
+        // alert("masuk getfilename");
         var temp = file.name.split('.');
         var fname = temp.slice(0,-1).join('.');
         return fname;
@@ -391,121 +368,26 @@ function buttonListener(docid,ControlDiv,secretKeyString){
                 console.log(docSnap.data().pdfName);
                 // console.log("Secret key: ", docSnap.data().secret_key);
                 const decryptedURL = decryption(docSnap.data().pdfUrl, docSnap.data().secret_key); //return a data object
-                // console.log("Decrypted url: ", decryptedURL);
-                // var pdfWindow = window.open(docSnap.data().pdfUrl, "blank");
-                // pdfWindow.focus();
-                // const pdfViewer = document.getElementById("pdfContainer");
-
-                // Create a new PDF viewer element.latest
-                // const iframe = document.querySelector(".pdf-overlay iframe");
-                // iframe.src = decryptedURL;
-                // const pdfViewer = document.getElementById("pdfViewer");
-                // pdfViewer.src = decryptedURL;
                 
                 const modal = new bootstrap.Modal(document.getElementById("pdfModal"));
                 const pdfModalLabel = document.getElementById("pdfModalLabel");
                 pdfModalLabel.innerHTML = docSnap.data().pdfName;
                 const pdfViewer = document.getElementById("pdfViewer1");
                 pdfViewer.src = decryptedURL;
-                console.log("Decrypted: " + decryptedURL);
-                pdfViewer.onerror = function() {
-                    // Handle error here
-                    console.error("Error occurred while loading the PDF");
-                };
+                var URltest = decryptedURL;
+                // var decryptedURL2 = URltest+="#toolbar=0";
+                var decryptedURL2 = URltest+="#toolbar=0&#contextmenu=false";
+                pdfViewer.src = decryptedURL2;
 
                 // Disable right-click context menu
-                document.addEventListener("contextmenu", function (e) {
-                    e.preventDefault();
-                });
-                
-                // Disable saving the document
-                document.addEventListener("keydown", function (e) {
-                    if (
-                    (e.ctrlKey && e.key === "s") || // For Windows
-                    (e.metaKey && e.key === "s") // For Mac
-                    ) {
-                    e.preventDefault();
-                    }
-                });
-  
+                function disableContextMenu() {
+                    var iframe = document.querySelector("iframe");
+                    iframe.oncontextmenu = function() {
+                    return false;
+                    };
+                }
                 modal.show();
-
-                //check this later why PDFObject error
-                // console.log("pdfViewer3");
-                // var options = {
-                //     pdfOpenParams: {
-                //         toolbar: 0, // Set toolbar to 0 to hide the toolbar
-                //     },
-                // };
-                // // PDFObject.embed(decryptedURL, "#pdfViewerContainer", options);
-                // try {
-                //     PDFObject.embed(decryptedURL, "#pdfViewerContainer", options);
-                // } catch (error) {
-                //     // Handle the error here
-                //     console.error("Error embedding PDF:", error);
-                // }
-
-                // const pdfViewerIframe = document.getElementById("pdfViewer");
-                // pdfViewerIframe.src = decryptedURL;
-
-                // const pdfViewer = document.createElement("embed");
-                // pdfViewer.type = "application/pdf";
-
-                // Disable print and download.
-                // function disablePrint() {
-                // var printButton = document.getElementById("printButton");
-                // printButton.disabled = true;
-                // console.log("PDF viewer disable print");
-                // }
-
-                // function disableDownload() {
-                // var downloadButton = document.getElementById("downloadButton");
-                // downloadButton.disabled = true;
-                // console.log("PDF viewer disable download");
-                // }
-
-                // function loadPDF(url){
-                //     console.log("PDF viewer 1");
-                //     pdfViewer.innerHTML = '';
-                //     // Create a new object element
-                //     const objectElement = document.createElement('iframe');
-                //     // objectElement.type = 'application/pdf';
-                //     objectElement.src = url;
-                //     objectElement.height   = '600px';
-                //     objectElement.width = '800px';
-                //     // objectElement.down = 'disabled';
-                //     // objectElement.sandbox = 'allow-modals';
-                //     objectElement.oncontextmenu = "return false;";
-                //     objectElement.scroll="return true;";
-
-
-                //     // Append the object element to the PDF viewer
-                //     pdfViewer.appendChild(objectElement);
-                //     console.log("PDF viewer 2");
-                //     // disableDownload();
-                //     // disablePrint();
-                // }
-                // loadPDF(docSnap.data().pdfUrl);
-
-                // pdfViewer.src = docSnap.data().pdfUrl;
-                // pdfViewer.style.width = "100%";
-                // pdfViewer.style.height = "100%";
-
-
-                // Add the PDF viewer to the DOM.
-                // document.body.appendChild(pdfViewer);
-                // console.log("PDF viewer after body");
-
-                // pdfViewer.onload = function() {
-                //     console.log("PDF viewer loaded");
-                //     try {
-                //         disablePrint();
-                //         disableDownload();
-                //     } catch (err) {
-                //         console.log("Error", err);
-                //     }
-                // };
-
+                disableContextMenu();
             }
             else {
                 // doc.data() will be undefined in this case
@@ -651,6 +533,7 @@ signout.addEventListener("click", () =>{
       // An error happened.
     });
 })
+
 
 
 

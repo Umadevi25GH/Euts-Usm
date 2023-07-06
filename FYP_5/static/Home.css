@@ -67,14 +67,14 @@ html{
   font-weight: 500;
   color: #556270;
   white-space: nowrap;
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 
 .nav-pills a i,
 .nav-pills a:focus i {
   font-size: 12px;
   line-height: 0;
-  /* margin-left: 5px; */
+  margin-left: 5px;
 }
 
 

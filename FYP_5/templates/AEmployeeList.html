@@ -461,22 +461,33 @@
 <!-- show inactive employees end -->
 
 
-
-
-
-<!-- <div class="b-example-divider"></div>
-<footer class="text-white py-4">
-<div class="container footer1">
-    <div class="row footer1">
-    <div class="col-md-7">
-        <img src="/FYP_5/static/logoBnW (6).png" alt="Your Company Logo" class="img-fluid" width="100">
+<!-- Button to trigger the new employee add modal start-->
+<button id="successEmpBtn" type="button" class="btn btn-primary" style="display: none;" data-bs-toggle="modal" data-bs-target="#successEmp">
+</button>
+<!-- Modal -->
+<div class="modal fade" id="successEmp" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                    New Employee has been successfully added.
+                    Email has been sent to the new employee.
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
     </div>
-    <div class="col-md-4 text-center">
-        <p>&copy; EUTS <?php echo date("Y"); ?>. All Rights Reserved.</p>
-    </div>
-    </div>
+  </div>
 </div>
-</footer>  -->
+<!-- Button to trigger the new employee add modal end-->
+
+
+
+
 <!-- ======= Footer ======= -->
 <footer id="footer">
     <div class="footer-top">

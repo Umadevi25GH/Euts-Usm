@@ -7,7 +7,7 @@ import { doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc,
 import { signOut, createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 
 import { ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
-alert("in AEmployeelist");
+// alert("in AEmployeelist");
 
 // firebaseAdmin.initializeApp({
 //     projectId: 'euts-1ca62'
@@ -159,6 +159,19 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
         var td3 = document.createElement("td");
         var td4 = document.createElement("td");
 
+        // if (docSnap.data().programmes && Array.isArray(docSnap.data().programmes)) {
+        //     const programmesContainer = document.getElementById("programmes");
+        //     const programmes = docSnap.data().programmes;
+            
+        //     programmes.forEach((programme) => {
+        //         const programmeTitle = programme.title;
+        //         const programmeElement = document.createElement("div");
+        //         programmeElement.classList.add("badge", "bg-info", "text-dark");
+        //         programmeElement.textContent = programmeTitle;
+        //         programmesContainer.appendChild(programmeElement);
+        //     });
+        // }
+
         empList.push([name, emp_id, role, estatus]);
         // console.log(empList);
         td0.innerHTML = ++empNo;
@@ -172,7 +185,7 @@ async function AddItemToTable(name, email, emp_id, role, estatus, docid){
         trow.appendChild(td2);
         trow.appendChild(td3);
         trow.appendChild(td4);
-        
+
         // console.log(emp_id);
         var ControlDiv = document.createElement("div");
         
@@ -235,7 +248,8 @@ function AddAllItemsToTheTable(empList){
     empNo = 0;
     tbody2.innerHTML="";
     empList.forEach(element => {
-        AddItemToTable(element.data().name, element.data().email, element.data().emp_id, element.data().role, element.data().estatus, element.id);
+        AddItemToTable(element.data().name, element.data().email, element.data().emp_id,
+        element.data().role, element.data().estatus, element.id);
     });
 }
 
@@ -285,7 +299,7 @@ nextBtn.addEventListener('click', () => {
         currentPage++;
         showPage(currentStep);
     } else {
-    form.classList.add('was-validated');
+        form.classList.add('was-validated');
     }
     currentStep++;
     showStep(currentStep);
@@ -528,23 +542,6 @@ function buttonListener(docid,ControlDiv,empList){
                     modalUpEsInput.value = optionInactive.value;
                 });
 
-
-                // const optionActive = document.createElement("active");
-                // optionActive.value = docSnap.data().estatus;
-                // optionActive.textContent = "Active";
-                // if (docSnap.data().role === "Active") {
-                //     optionActive.selected = true;
-                //     modalUpEsInput.value = optionActive.value;
-                // }
-
-                // const optionInactive = document.createElement("inactive");
-                // optionInactive.value = docSnap.data().estatus;
-                // optionInactive.textContent = "Inactive";
-                // if (docSnap.data().role === "Inactive") {
-                //     optionInactive.selected = true;
-                //     modalUpEsInput.value = optionInactive.value;
-                // }
-
                 
                 var modalUpRoleInput = document.getElementById("update-role");
                 modalUpRoleInput.value = docSnap.data().role;
@@ -585,47 +582,6 @@ function buttonListener(docid,ControlDiv,empList){
                 optionExec.addEventListener("input", function() {
                 modalUpRoleInput.value = optionExec.value;
                 });
-
-                // Create option elements for the select dropdown
-                // const optionAdmin = document.getElementById("admin");
-                // optionAdmin.value = docSnap.data().role;
-                // optionAdmin.textContent = "Admin";
-                // if (docSnap.data().role === "Admin") {
-                //     optionAdmin.selected = true;
-                //     modalUpRoleInput.value = optionAdmin.value;
-                // }
-
-                // const optionDirector = document.getElementById("director");
-                // optionDirector.value = docSnap.data().role;
-                // optionDirector.textContent = "Director";
-                // if (docSnap.data().role === "Director") {
-                //     optionDirector.selected = true;
-                //     modalUpRoleInput.value = optionDirector.value;
-                // }
-
-                // const optionManager = document.getElementById("manager");
-                // optionManager.value = docSnap.data().role;
-                // optionManager.textContent = "Manager";
-                // if (docSnap.data().role === "Manager") {
-                //     optionManager.selected = true;
-                //     modalUpRoleInput.value = optionManager.value;
-                // }
-
-                // const optionSrExec = document.getElementById("srexecutive");
-                // optionSrExec.value = docSnap.data().role;
-                // optionSrExec.textContent = "Senior Executive";
-                // if (docSnap.data().role === "Senior Executive") {
-                //     optionSrExec.selected = true;
-                //     modalUpRoleInput.value = optionSrExec.value;
-                // }
-
-                // const optionExec = document.getElementById("executive");
-                // optionExec.value = docSnap.data().role;
-                // optionExec.textContent = "Executive";
-                // if (docSnap.data().role === "Executive") {
-                //     optionExec.selected = true;
-                //     modalUpRoleInput.value = optionExec.value;
-                // }
         
                 // var editForm = modalForm.id;
                 const updateUser = document.getElementById('updateUser');
@@ -662,9 +618,6 @@ function buttonListener(docid,ControlDiv,empList){
                     .catch(error => {
                         console.log(error);
                     })
-
-                    // updateEmployee(employeeKey, name, id, role);
-                    // modal.style.display = 'none';
                 });
             } else {
                     // doc.data() will be undefined in this case
@@ -810,26 +763,12 @@ addUser?.addEventListener("click", function(){
         }).then(
           message => alert(message)
         );
-
-        // const message = {
-        //     to: email,
-        //     subject: "New user account created",
-        //     text: `
-        //     Dear ${user.name},
-
-        //     A new user account has been created for you on our website. Your username is ${email} and your password is ${password}.
-
-        //     Please click on the following link to log in:
-
-        //     http://127.0.0.1:5501/FYP_5/templates/Home.html
-
-        //     Thank you,
-        //     The website team
-        //     `,
-        // };
-        // // Send the email message
-        // sendEmail(message);
-        //send email notification end
+        const successEmpBtn = document.getElementById("successEmpBtn");
+        showSuccessModal();
+        // Function to show the success modal
+        function showSuccessModal() {
+            successEmpBtn.click();
+        }
     })
     .catch((error) => {
         const errorCode = error.code;

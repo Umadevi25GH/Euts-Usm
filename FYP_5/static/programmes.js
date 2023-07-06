@@ -5,7 +5,7 @@ import { ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject, getSto
 
 import { ref, set, child, get, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
-console.log("Programmes");
+// console.log("Programmes");
 
 // Check user role on other pages
 const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -180,9 +180,9 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
     applyButton.textContent = "Apply";
 
     // Create card button to Apply
-    const delProgButton = document.createElement("button");
-    delProgButton.className = "btn1";
-    delProgButton.textContent = "Remove";
+    // const delProgButton = document.createElement("button");
+    // delProgButton.className = "btn1";
+    // delProgButton.textContent = "Remove";
     
     // Append elements to card body
     cardBody.appendChild(cardTitle);
@@ -194,7 +194,7 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
     
     cardBody.appendChild(cardButton);
     cardBody.appendChild(applyButton);
-    cardBody.appendChild(delProgButton);
+    // cardBody.appendChild(delProgButton);
 
     // Append card body to card
     card.appendChild(cardBody);

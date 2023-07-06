@@ -281,77 +281,63 @@ function fetchEmployees() {
 }
 
 
-function fetchEmpCount() {
+// function fetchEmpCount() {
     // Reference to the Firebase database
     // Function to fetch employee program data from Firebase collection
-    async function fetchEmployeeData() {
-        const collectionRef = collection(db, 'employees');
-        const querySnapshot = await getDocs(collectionRef);
-        // const uniqueData = new Set();
-        const dataArray = [];
+    // async function fetchEmployeeData() {
+    //     const collectionRef = collection(db, 'employees');
+    //     const querySnapshot = await getDocs(collectionRef);
+    //     // const uniqueData = new Set();
+    //     const dataArray = [];
 
-        querySnapshot.forEach((doc) => {
-            const mapField = doc.data().role;
+    //     querySnapshot.forEach((doc) => {
+    //         const mapField = doc.data().role;
           
-            if (mapField) {
-              const role = mapField;
-              console.log(role);
-              dataArray.push(role);
-            } else {
-              console.log("No role or mapField is empty");
-            }
-        });
+    //         if (mapField) {
+    //           const role = mapField;
+    //           console.log(role);
+    //           dataArray.push(role);
+    //         } else {
+    //           console.log("No role or mapField is empty");
+    //         }
+    //     });
 
+    //     const data = {};
 
-        // querySnapshot.forEach((doc) => {
-        // const mapField = doc.data().role;
-        
-        // if (mapField) {
-        //     // Object.keys(mapField).forEach((key) => {
-        //     // const value = mapField[key];
-        //     // uniqueData.add(value);
-        //     const value = mapField
-        //     dataArray.push(value);
-        //     // });
-        // }
-        // });
+    //     dataArray.forEach((value) => {
+    //     if (data.hasOwnProperty(value)) {
+    //         data[value] += 1;
+    //     } else {
+    //         data[value] = 1;
+    //     }
+    //     });
 
-        const data = {};
-
-        dataArray.forEach((value) => {
-        if (data.hasOwnProperty(value)) {
-            data[value] += 1;
-        } else {
-            data[value] = 1;
-        }
-        });
-
-        console.log(data);
-        return data;
-    }
+    //     console.log(data);
+    //     return data;
+    // }
     
-    // Function to generate the pie chart
-    function generatePieChart(data) {
-        const categories = Object.keys(data);
-        const values = Object.values(data);
+    // // Function to generate the pie chart
+    // function generatePieChart(data) {
+    //     const categories = Object.keys(data);
+    //     const values = Object.values(data);
     
-        const options = {
-        series: values,
-        labels: categories,
-        chart: {
-            type: 'pie',
-        },
-        };
+    //     const options = {
+    //     series: values,
+    //     labels: categories,
+    //     chart: {
+    //         type: 'pie',
+    //     },
+    //     };
     
-        const chart = new ApexCharts(document.getElementById('chartContainer1'), options);
-        chart.render();
-    }
+    //     const chart = new ApexCharts(document.getElementById('chartContainer1'), options);
+    //     chart.render();
+    // }
     
-    // Fetch employee program data from Firebase and generate the pie chart
-    fetchEmployeeData().then((data) => {
-        generatePieChart(data);
-    });
-}
+    // // Fetch employee program data from Firebase and generate the pie chart
+    // fetchEmployeeData().then((data) => {
+    //     generatePieChart(data);
+    // });
+// }
 
 // Fetch number of files uploaded from Firebase
 function fetchFilesCount() {
@@ -438,19 +424,24 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchEmployees();
     fetchFilesCount();
     fetchProgCount();
-    fetchEmpCount();
+    // fetchEmpCount();
     fetchFilesACount();
 });
 
 // Fetch employee data from Firebase
 async function fetchEmployees1() {
     const employeesRef = collection(db, "employees");
-
+    const employees = [];
     onSnapshot(employeesRef, (snapshot) => {
-        const employees = [];
+
         snapshot.forEach((doc) => {
-            const { name, imageUrl, role } = doc.data();
-            employees.push({ name, imageUrl, role });
+            if (doc.data().estatus == "Active"){
+                const { name, imageUrl, role } = doc.data();
+                employees.push({ name, imageUrl, role });
+                console.log("List employees:", employees);
+            } else {
+                console.log("Inactive employee", doc.data().name);
+            }
         });
 
         let carouselItems = "";
@@ -468,6 +459,7 @@ async function fetchEmployees1() {
         });
 
         const carouselInner = document.querySelector(".carousel-inner");
+        // carouselItems.classList.add("carousel-item");
         console.log("carouselInner");
         try{
             console.log("try");
@@ -483,9 +475,43 @@ async function fetchEmployees1() {
     });
 }
 
+// async function fetchEmployees2() {
+//     // Retrieve employees from Firebase
+//     const employeesRef = collection(db, "employees");
+//     const querySnapshot = await getDocs(employeesRef);
+    
+//     const employeeGallery = document.getElementById("employeeGallery");
+//     const employees = [];
+//     querySnapshot.forEach((doc, index) => {
+//         const employeeData = doc.data();
+//         const { name, role, imageUrl } = employeeData;
+//         employees.push({ name, imageUrl, role });
+//         // console.log("List employees:", employees);
+
+//         const carouselItem = document.createElement("div");
+//         carouselItem.classList.add("carousel-item");
+//         if (index === 0) {
+//           carouselItem.classList.add("active");
+//         }
+//         carouselItem.innerHTML = `
+//           <div class="card">
+//             <img src="${doc.data().imageUrl}" class="card-img-top" alt="${doc.data().name}">
+//             <div class="card-body">
+//               <h5 class="card-title">${doc.data().name}</h5>
+//               <p class="card-text">${doc.data().role}</p>
+//             </div>
+//           </div>
+//         `;
+  
+//         employeeGallery.appendChild(carouselItem);
+//     });
+// }
+
+
 // Fetch data on page load
 document.addEventListener('DOMContentLoaded', () => {
     fetchEmployees1();
+    fetchEmployees2();
 });
 
 //dashboad for admin end

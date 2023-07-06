@@ -21,7 +21,7 @@ else{
 }
 
 async function displayEmp(currentUser){
-    console.log("In User");
+    // console.log("In User");
     const uid = currentUser.uid;
     const docRef=doc(db, "employees", uid);
     const docSnap = await getDoc(docRef);
@@ -39,8 +39,15 @@ async function displayEmp(currentUser){
         console.log(prog);
         console.log(doc.id, " => ", doc.data());
     });
-    console.log("test1",prog);
     generateAllProgramCards(prog);
+
+    // var empProg = [];
+    // const snapshot = await getDocs(collection(db, "employees"));
+    // snapshot.forEach(async (doc) => {
+    //     empProg.push(doc);
+    // });
+    // generateAllEmpProgramCards(empProg);
+
 }
 
 
@@ -143,7 +150,7 @@ var progList = [];
 //https://getbootstrap.com/docs/5.0/components/card/
 function generateProgramCards(title,category,introduction,description,imgUrl,eDate,sDate,pid) {
     progList.push([title, category, introduction, description, imgUrl, eDate, sDate, pid]);
-    console.log("check:",progList);
+    // console.log("check:",progList);
     
     // Create card element row
     // const card = document.createElement("div");
@@ -376,8 +383,7 @@ function generateAllProgramCards(progList){
     progNo = 0;
     programCardsContainer.innerHTML = "";
     progList.forEach(element => {
-        generateProgramCards(element.data().title, element.data().category, element.data().introduction, element.data().description,
-        element.data().imgUrl, element.data().sDate, element.data().eDate, element.data().pid);
+        generateProgramCards(element.data().title, element.data().category, element.data().introduction, element.data().description, element.data().imgUrl, element.data().sDate, element.data().eDate, element.data().pid);
     });
 }
 
@@ -509,10 +515,52 @@ addP.addEventListener('click',function(){
 });
 
 
+var progEmpList = [];
+var tbody = document.getElementById("empProgTableBody");
+function generateEmpProg(name, emp_id, programmeTitle){
+    progEmpList.push([name, emp_id, programmeTitle]);
+    // var iempNo = 0;
+    var trow = document.createElement("tr");
+    var td0 = document.createElement("td");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    // var td4 = document.createElement("td");
+
+    // console.log(empList);
+    // td0.innerHTML = ++iempNo;
+    td1.innerHTML = name.toUpperCase();
+    td2.innerHTML = emp_id;
+
+    td3.innerHTML = programmeTitle;
+    // td4.innerHTML = estatus;
+
+    // trow.appendChild(td0);
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    trow.appendChild(td3);
+    // trow.appendChild(td4);
+
+    tbody.appendChild(trow);
+    // buttonListener(docid,ControlDiv,empList);
+}
 
 
-
-
+function generateAllEmpProgramCards(empProg){
+    progNo = 0;
+    programCardsContainer.innerHTML = "";
+    empProg.forEach(element => {
+        if (element.data().programmes && Array.isArray(element.data().programmes))
+        {
+            const programmes = element.data().programmes;
+            programmes.forEach((programme) => {
+                const programmeTitle = programme.title;
+                console.log("program titles: " + programmeTitle);
+                generateEmpProg(element.data().name, element.data().emp_id, programmeTitle);
+            });
+        } else {console.log("no programmes");}
+    });
+}
 
 
 

@@ -181,24 +181,24 @@ function buttonListener(docid,ControlDiv){
             const modal = new bootstrap.Modal(document.getElementById("pdfModal"));
             const pdfModalLabel = document.getElementById("pdfModalLabel");
             pdfModalLabel.innerHTML = docSnap.data().pdfName;
-            const pdfViewer = document.getElementById("pdfViewer1");
-            pdfViewer.src = decryptedURL;
+            const pdfViewer = document.getElementById("pdfViewer1"); 
+            var URltest = decryptedURL;
+            // var decryptedURL2 = URltest+="#toolbar=0";
+            var decryptedURL2 = URltest+="#toolbar=0&#contextmenu=false";
+            // console.log(decryptedURL2);
+            // pdfViewer.style = "toolbar=0";
+            pdfViewer.src = decryptedURL2;
 
             // Disable right-click context menu
-            document.addEventListener("contextmenu", function (e) {
-                e.preventDefault();
-            });
-            
-            // Disable saving the document
-            document.addEventListener("keydown", function (e) {
-                if (
-                    (e.ctrlKey && e.key === "s") || // For Windows
-                    (e.metaKey && e.key === "s") // For Mac
-                ) {
-                    e.preventDefault();
-                }
-            });
+            function disableContextMenu() {
+                var iframe = document.querySelector("iframe");
+                iframe.oncontextmenu = function() {
+                  return false;
+                };
+            }
             modal.show();
+            disableContextMenu();
+            
         }
         else {
             // doc.data() will be undefined in this case

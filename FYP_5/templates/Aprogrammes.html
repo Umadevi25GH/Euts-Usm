@@ -82,12 +82,15 @@
         <h6> Below are latest list of training programmes available</h6>
     </div>
     <!-- my-5 px-3 py-5 -->
-    <div class="container-project my-5 px-5 col mt-5">
+    <div class="container-project my-3 px-5 col mt-5">
         <div class="row" id="programCards"></div>
     </div>
     <div class="container-project px-1">
         <button type="button" class="btn1 add-col" data-bs-toggle="modal" data-bs-target="#prog-modal">Add New Programme</button>
     </div>
+    <!-- <div class="container-project px-1">
+        <button type="button" class="btn1 emp-prog" data-bs-toggle="modal" data-bs-target="#emp-Applied">View Employees Applied</button>
+    </div> -->
 </div>
 <!--new dynamic programme end-->
 
@@ -217,7 +220,34 @@
 </div>
 <!-- Button to trigger the apply modal end-->
 
-
+<!-- show inactive employees start -->
+<!-- Modal -->
+<div class="modal fade" id="emp-Applied" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="employeeModalLabel">Programmes Employees Applied</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- <th>No</th> -->
+                <th>Name</th>
+                <th>ID</th>
+                <th>Programmes</th>
+              </tr>
+            </thead>
+            <tbody id="empProgTableBody">
+              <!-- Table rows will be dynamically added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- show inactive employees end -->
 
 
 

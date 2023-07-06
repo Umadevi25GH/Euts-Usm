@@ -20,6 +20,19 @@ body {
     background-color: #f2f2f2;
   }
 
+  canvas {
+    border: 1px solid #ccc;
+  }
+
+  /* Hide the toolbar */
+  iframe {
+    display: block;
+    /* width: 100%;
+    height: 100%; */
+    border: none;
+    overflow: hidden;
+  }
+
   /* Style the modal to cover the entire viewport */
   /* .modal-dialog {
     width: 100%;
