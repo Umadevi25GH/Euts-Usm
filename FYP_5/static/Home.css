@@ -26,22 +26,32 @@ html{
 #header {
   background: #024366;
   transition: all 0.5s;
-  z-index: 997;
-  padding: 20px 0;
+  left: 0%;
+  top: 0%;
+  position: fixed;
+  width: 100%;
+  /* z-index: 997; */
+  z-index: 100;
+  padding: 10px;
+  /* margin-bottom: 50px; */
+  
 }
 
-#header.header-scrolled {
+/* #header.header-scrolled {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   padding: 12px 0;
 }
 
 #header.header-inner-pages {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
+} */
 
 
-#header .logo img {
-  max-height: 40px;
+#header img {
+  /* max-height: 40%; */
+  width:5%; 
+  height:10%;
+  margin-right: 3%;
 }
 
 /*--------------------------------------------------------------
@@ -56,7 +66,7 @@ html{
   position: relative;
 }
 
-.nav-bar a,
+/* .nav-bar a,
 .nav-pills a:focus {
   display: flex;
   align-items: center;
@@ -67,8 +77,8 @@ html{
   font-weight: 500;
   color: #556270;
   white-space: nowrap;
-  /* transition: 0.3s; */
-}
+  /* transition: 0.3s;
+} */
 
 .nav-pills a i,
 .nav-pills a:focus i {
@@ -135,7 +145,7 @@ html{
 
 
 body {
-  margin: 0;
+  margin-top: 7%;
   padding: 0;
   text-align: justify;
   font-family: 'Calibri', sans-serif;
@@ -174,14 +184,8 @@ footer {
   /* font-size: 14px; */
   background-color: #036599;
   position:fixed-bottom;
-  margin-top: 40%;
+  margin-top: 2%;
 }
-
-/* .container .footer1 {
-  font-size: 14px;
-  background-color: #036599;
-  position:fixed-bottom;
-} */
 
 footer img {
   margin-bottom: 15px;
@@ -547,29 +551,26 @@ section {
 --------------------------------------------------------------*/
 #footer {
   background: #4a5562;
-  padding: 0 0 30px 0;
+  /* padding: 0 0 30px 0; */
   color: #fff;
   font-size: 14px;
+  /* background: #515d6a; */
+  padding: 60px;
 }
 
-#footer .footer-top {
-  background: #515d6a;
-  padding: 60px 0 30px 0;
-}
-
-#footer .footer-top .footer-info {
+#footer .footer-info {
   margin-bottom: 30px;
+  padding: 2px 0 2px 0;
+  /* margin: 0 0 20px 0; */
 }
 
-#footer .footer-top .footer-info h3 {
+#footer .footer-info h3 {
   font-size: 24px;
-  margin: 0 0 20px 0;
-  padding: 2px 0 2px 0;
   line-height: 1;
   font-weight: 700;
 }
 
-#footer .footer-top .footer-info p {
+#footer .footer-info p {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;

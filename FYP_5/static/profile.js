@@ -37,27 +37,28 @@ async function displayEmp(currentUser){
         document.getElementById("nationality").innerText = docSnap.data().nationality;
         document.getElementById("education").innerText = docSnap.data().education;
         document.getElementById("role").innerText = docSnap.data().role;
-        alert("Image url: " + docSnap.data().imageUrl);
+        // alert("Image url: " + docSnap.data().imageUrl);
         img1.src = docSnap.data().imageUrl;
         if (docSnap.data().programmes && Array.isArray(docSnap.data().programmes)) {
-            const programmesContainer = document.getElementById("programmes");
+            console.log(docSnap.data().programmes);
+            const programmesContainer = document.getElementById("programmes1");
             const programmes = docSnap.data().programmes;
             
             programmes.forEach((programme) => {
-                const programmeTitle = programme.title;
+                const programmeTitle = programme;
                 const programmeElement = document.createElement("div");
                 programmeElement.classList.add("badge", "bg-info", "text-dark");
                 programmeElement.textContent = programmeTitle;
                 programmesContainer.appendChild(programmeElement);
             });
         } else {
-            const programmesContainer = document.getElementById("programmes");
+            const programmesContainer = document.getElementById("programmes1");
             const programmeElement = document.createElement("div");
             programmeElement.classList.add("badge", "bg-light", "text-dark");
             programmeElement.textContent = "None";
             programmesContainer.appendChild(programmeElement);
         }
-    } else {
+        } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
         }
@@ -111,7 +112,7 @@ async function displayEmp(currentUser){
 
 //upload prcess
     function uploadProcess(files) {
-        alert("masuk upload process");
+        // alert("masuk upload process");
         var imgToUpload = files[0];
         var imgName = namebox.value + extlab.innerHTML;
 
@@ -123,7 +124,7 @@ async function displayEmp(currentUser){
         const metaData = {
             contentType: imgToUpload.type
         }
-        alert("masuk upload1");
+        // alert("masuk upload1");
         // const storage = getStorage();
         const storageRef = sRef(storage, "emp_images/"+imgName);
         const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
@@ -148,7 +149,7 @@ async function displayEmp(currentUser){
 
 //download
     async function SaveURLtoCollectionDB(URL){
-        alert("save img url")
+        // alert("save img url")
         const uid = currentUser.uid;
         const imgRef = doc(db, "employees", uid);
         await updateDoc(imgRef,{

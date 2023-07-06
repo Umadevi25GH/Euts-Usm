@@ -45,16 +45,29 @@ async function displayEmp(currentUser){
             const programmes = docSnap.data().programmes;
             
             programmes.forEach((programme) => {
+                console.log("masuk array:",programme);
                 const programmeTitle = programme.title;
-                const programmeElement = document.createElement("div");
-                programmeElement.classList.add("badge", "bg-info", "text-dark");
-                programmeElement.textContent = programmeTitle;
+                // const programmeElement = document.createElement("ol");
+                // programmeElement.style = "color:black";
+                // programmeElement.classList.add("text-dark");
+                // programmeElement.textContent = " " + programmeTitle;
+                // programmesContainer.appendChild(programmeElement);
+
+                const programmeElement = document.createElement("ul");
+                programmeElement.style.color = "black";
+                programmeElement.classList.add("text-dark");
+
+                const listItem = document.createElement("li");
+                listItem.textContent = programmeTitle;
+
+                programmeElement.appendChild(listItem);
                 programmesContainer.appendChild(programmeElement);
+
             });
         } else {
             const programmesContainer = document.getElementById("programmes");
             const programmeElement = document.createElement("div");
-            programmeElement.classList.add("badge", "bg-light", "text-dark");
+            programmeElement.classList.add("text-dark");
             programmeElement.textContent = "None";
             programmesContainer.appendChild(programmeElement);
         }
@@ -369,13 +382,25 @@ function fetchProgCount() {
         // const uniqueData = new Set(data1);
         const dataArray = [];
 
+        // querySnapshot.forEach((doc) => {
+        //     const mapField = doc.data().programmes;
+            
+        //     if (mapField && Array.isArray(mapField) && mapField.length > 0) {
+        //         const category = mapField[doc].category;
+        //         console.log("Category: ",category);
+        //         dataArray.push(category);
+        //     } else {
+        //         console.log("No category or mapField is empty");
+        //     }
+        // });
         querySnapshot.forEach((doc) => {
             const mapField = doc.data().programmes;
-            
             if (mapField && Array.isArray(mapField) && mapField.length > 0) {
-                const category = mapField[0].category;
-                console.log(category);
-                dataArray.push(category);
+                for (var i = 0; i < mapField.length; i++) {
+                  const category = mapField[i].category;
+                  console.log("Category: ", category);
+                  dataArray.push(category);
+                }
             } else {
                 console.log("No category or mapField is empty");
             }
@@ -511,7 +536,7 @@ async function fetchEmployees1() {
 // Fetch data on page load
 document.addEventListener('DOMContentLoaded', () => {
     fetchEmployees1();
-    fetchEmployees2();
+    // fetchEmployees2();
 });
 
 //dashboad for admin end

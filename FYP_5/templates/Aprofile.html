@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/FYP_5/static/Home.css">
     <link rel="stylesheet" href="/FYP_5/static/profile.css">
@@ -20,38 +21,12 @@
 
   gtag('config', 'G-JW8L099ZC4');
 </script>
-<!-- <nav class="navbar fixed-top">
-    <div class="container navigation">
-        <a class="navbar-brand" href="#">
-            <img src="/FYP_5/static/logoBnW (1).png" alt="" width="60" height="45">
-        </a>
-        <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
-        <ul class = "nav nav-pills ms-auto">
-            <li class="nav-item">
-                <a href="#" aria-current="page" class="nav-link active1 text" id="nav-link-profile">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text" id="nav-link-resources">Resources</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text" id="nav-link-programmes">Programmes</a>
-            </li>
-            <li class="nav-item">
-                <a href="/FYP_5/templates/AEmployeeList.html" class="nav-link text" id="nav-link-employees">Employees Management</a>
-            </li>
-            <li class="nav-item">
-                <a href="/FYP_5/templates/Home.html" class="nav-link text" id="nav-link-logout">Logout</a>
-            </li>
-        </ul>
-    </div>
-</nav> -->
-
-<header id="header" class="fixed-top d-flex align-items-center">
+<header id="header" class="sticky-top">
     <div class="container d-flex align-items-center">
-        <a class="navbar-brand" href="#">
-        <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW" width="60" height="45">
-        </a>
-        <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+        <!-- <a class="navbar-brand" href="#"> -->
+        <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW">
+        <!-- </a> -->
+        <div class="username"> Welcome,<strong><span id="name1">Umadevi</span></strong></div>
         <ul class = "nav nav-pills ms-auto">
             <li class="nav-item">
                 <a href="#" aria-current="page" class="nav-link active1 text" id="nav-link-profile">Profile</a>
@@ -70,117 +45,98 @@
         </ul>
     </div>
 </header><!-- End Header -->
-
 <body>
-    <br/><br/><br/>
-    <div class="container-fluid">
-        <div class="row mb-3 justify-content-center">
-            <div class="col-lg-12">
-                <div class="row py-4">
-                    <div class="col-sm-6 rounded">
-                        <div class="profile-card-a rounded-2 px-5 mx-5 py-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                            <div class="profile-card-top-a" style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <img id="img1" alt="User Icon" class="rounded-circle" style="max-height:min-content; margin-right: 1%; max-width: 40%;">
-                                <div class="profile-card-info">
-                                    <h5 id="name2">Umadevi</h5>
-                                    <span id="eid">ID: 148358</span><br>
-                                    <span id="email">Email: uma@example.com</span><br>
-                                    <span id="role">Admin</span>
+    <div class="container-fluid mt-5 col-10">
+        <div class="row mb-3 justify-content-center py-4">
+            <div class="col-sm-6 rounded">
+                <div class="profile-card-a rounded-2 px-5 mx-5 py-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); background-color:white;">
+                    <div class="profile-card-top-a" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <img id="img1" alt="User Icon" class="rounded-circle" style="max-height:min-content; margin-right: 1%; max-width: 40%;">
+                        <div class="profile-card-info">
+                            <h5 id="name2">Umadevi</h5>
+                            <span id="eid">ID: 148358</span><br>
+                            <span id="email">Email: uma@example.com</span><br>
+                            <span id="role">Admin</span>
+                        </div>
+                    </div>
+                    <label type="text" id="namebox"></label>
+                    <label id="extlab"></label>
+                    <label id="proglab"></label>
+                    <div class="profile-card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                            <span class="mb-2">Gender</span>
+                            <span class="mb-2">Age</span>
+                            <span class="mb-2">Marital Status</span>
+                            <span class="mb-2">Race</span>
+                            <span class="mb-2">Nationality</span>
+                            <span class="mb-2">Education</span>
+                            <span class="mb-2">Programmes</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <span class="mb-2" id="gender">Female</span>
+                                <span class="mb-2" id="age">27</span>
+                                <span class="mb-2" id="mstatus">Single</span>
+                                <span class="mb-2" id="race">Indian</span>
+                                <span class="mb-2" id="nationality">Malaysian</span>
+                                <span class="mb-2" id="education">Bachelor's Degree</span>
+                                <span class="mb-2" id="programmes"></span>
+                            </div>
+                        </div><br>
+                        <button type="submit" class="btn1 btn-sm" id="chooseBtn">Upload Picture</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 rounded">
+                <div class="dashboard">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                                    <h3>EUTS Employees</h3>
+                                    <ul id="employees-list"></ul>
                                 </div>
                             </div>
-                            <label type="text" id="namebox"></label>
-                            <label id="extlab"></label>
-                            <label id="proglab"></label>
-                            <br>
-                            <button type="submit" class="btn1 btn-sm mt-3" id="chooseBtn">Upload Picture</button>
-                            <div class="profile-card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                    <span>Gender:</span><br>
-                                    <span>Age:</span><br>
-                                    <span>Marital Status:</span><br>
-                                    <span>Race:</span><br>
-                                    <span>Nationality:</span><br>
-                                    <span>Education:</span>
-                                    <span>Programmes:</span>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <span id="gender">Female</span><br>
-                                        <span id="age">27</span><br>
-                                        <span id="mstatus">Single</span><br>
-                                        <span id="race">Indian</span><br>
-                                        <span id="nationality">Malaysian</span><br>
-                                        <span id="education">Bachelor's Degree</span>
-                                        <!-- <span id="programmes"></span> -->
-                                        <!-- <div class="container"> -->
-                                        <div id="programmes" class="mt-2"></div>
-                                        <!-- </div> -->
-                                    </div>
-                                </div><br>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                            <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                                <h4>Resources Uploaded</h4>
+                                <i class="bi bi-folder"><h3 id="files-count"></h3></i>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                                    <h4>Resources Archived</h4>
+                                    <i class="bi bi-folder"><h3 id="files-Acount"></h3></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 rounded">
-                        <div class="dashboard">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                                            <h3>EUTS Employees</h3>
-                                            <ul id="employees-list"></ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                    <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                                        <h3>Resources Uploaded</h3>
-                                        <i class="bi bi-folder"><h3 id="files-count"></h3></i>
-                                    </div>
-                                    <div class="card-body" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                                        <h3>Resources Archived</h3>
-                                        <i class="bi bi-folder"><h3 id="files-Acount"></h3></i>
-                                    </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-4">
-                                    <div class="card">
-                                    <div class="card-body">
-                                        <i class="bi bi-graph-up"></i>
-                                        <h3>Analytics</h3>
-                                        <p>Coming Soon...</p>
-                                    </div>
-                                    </div>
-                                </div> -->
-                                <div class="col-md-10 border-dark">
-                                    <div class="container py-3">
-                                        <h3>Applied Programmes</h3>
-                                        <div id="chartContainer" class="mt-4"></div>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-10">
-                                    <div class="container py-3">
-                                        <h3>Applied Programmes</h3>
-                                        <div id="chartContainer1" class="mt-4"></div>
-                                    </div>
-                                </div> -->
+                    <hr>
+                    <div class="row justify-content-center">
+                        <div class="card col-md-9" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                            <div class="container p-3">
+                                <h3>Applied Programmes</h3>
+                                <div id="chartContainer" class="mt-4"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row-sm-6 rounded-2 px-5 mx-5 py-4">
-            <div>
-                <H2>Active Members of EUTS</H2>
-            </div>
-            <div class="col-sm-6">
+        <hr>
+        <div class="row justify-content-center py-4">
+        <h3>Active Members of EUTS</h3>
+            <div class="col-sm-3">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
+                    <!-- <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
+                    </div> -->
                     <div class="carousel-inner">
         
                     </div>
@@ -194,60 +150,26 @@
                     </button>
                 </div>
             </div>
-            <!-- <div>
-                <H2>Testing</H2>
-            </div>
-            <div id="employeeCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner" id="employeeGallery"></div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#employeeCarousel" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#employeeCarousel" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-            </div> -->
         </div>
     </div>
 </div>
       
 
-
-    <!-- footer
-<div class="b-example-divider"></div>
-<footer class="text-white py-3">
-    <div class="container footer1">
-    <div class="row footer1">
-        <div class="col-md-7">
-        <img src="/FYP_5/static/logoBnW (6).png" alt="Your Company Logo" class="img-fluid" width="100">
-        </div>
-        <div class="col-md-4 text-center">
-        <p>&copy; EUTS <?php echo date("Y"); ?>. All Rights Reserved.</p>
-        </div>
-    </div>
-    </div>
-</footer> -->
-
 <!-- ======= Footer ======= -->
 <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-  
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Employee Upskilling Training System</h3>
-              <p>
-                EUTS Group <br>
-                11800, Penang<br><br>
-                <strong>Phone:</strong> +04 12345678<br>
-                <strong>Email:</strong> eutsusm@gmail.com<br>
-              </p>
-            </div>
-          </div>
+    <div class="row">
+        <div class="footer-info col-md-4">
+            <h3>Employee Upskilling Training System</h3>
+            <p>
+            EUTS Group <br>
+            11800, Penang<br><br>
+            <strong>Phone:</strong> +04 12345678<br>
+            <strong>Email:</strong> eutsusm@gmail.com<br>
+            </p>
         </div>
-      </div>
+        <div class="col-md-8 text-end">
+            <img src="/FYP_5/static/logoBnW (1).png" alt="" width="20%" height="80%">
+        </div>
     </div>
     <div class="container">
       <div class="copyright">

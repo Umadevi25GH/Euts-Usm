@@ -264,22 +264,28 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         const empRef = doc(db, "employees", currentUser.uid);
         const progRef = doc(db, "programmes", pid);
         const docSnap = await getDoc(progRef);
-        const newProgrammes = docSnap.data().title;
-        
-        updateDoc(empRef, {
-            'programmes': arrayUnion(newProgrammes)
-        })
-        .then(() => {
-            console.log("programmes has been updated successfully");
-            const applyProgBtn = document.getElementById("applyProgBtn");
-            showModal(applyProgBtn);
-            function showModal(element) {
-                element.click();
-            }
-        })
-        .catch(error => {
-            console.log('Error adding new programme:', error);
-        });
+
+        if (docSnap.exists()) {
+            const programme = {
+                title: docSnap.data().title,
+                category: docSnap.data().category
+            };
+            updateDoc(empRef, {
+                'programmes': arrayUnion(programme)
+            })
+            .then(() => {
+                console.log("programmes has been updated successfully");
+
+                const applyProgBtn = document.getElementById("applyProgBtn");
+                showModal(applyProgBtn);
+                function showModal(element) {
+                    element.click();
+                }
+            })
+            .catch(error => {
+                console.log('Error adding new programme:', error);
+            });
+        }
     });
 }
 
