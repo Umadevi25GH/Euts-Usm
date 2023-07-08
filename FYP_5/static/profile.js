@@ -26,7 +26,7 @@ async function displayEmp(currentUser){
         document.getElementById("name1").innerText = docSnap.data().name;
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-        document.getElementById("nameU").innerText = docSnap.data().name;
+        document.getElementById("name2").innerText = docSnap.data().name;
         // document.getElementById("name1").innerText = docSnap.data().name;
         document.getElementById("eid").innerText = docSnap.data().emp_id;
         document.getElementById("email").innerText = docSnap.data().email;
@@ -40,30 +40,35 @@ async function displayEmp(currentUser){
         // alert("Image url: " + docSnap.data().imageUrl);
         img1.src = docSnap.data().imageUrl;
         if (docSnap.data().programmes && Array.isArray(docSnap.data().programmes)) {
-            console.log(docSnap.data().programmes);
-            const programmesContainer = document.getElementById("programmes1");
+            const programmesContainer = document.getElementById("programmes");
             const programmes = docSnap.data().programmes;
             
             programmes.forEach((programme) => {
-                const programmeTitle = programme;
-                const programmeElement = document.createElement("div");
-                programmeElement.classList.add("badge", "bg-info", "text-dark");
-                programmeElement.textContent = programmeTitle;
+                const programmeTitle = programme.title;
+
+                const programmeElement = document.createElement("ul");
+                programmeElement.style.color = "black";
+                programmeElement.classList.add("text-dark");
+
+                const listItem = document.createElement("li");
+                listItem.textContent = programmeTitle;
+
+                programmeElement.appendChild(listItem);
                 programmesContainer.appendChild(programmeElement);
             });
         } else {
-            const programmesContainer = document.getElementById("programmes1");
+            const programmesContainer = document.getElementById("programmes");
             const programmeElement = document.createElement("div");
-            programmeElement.classList.add("badge", "bg-light", "text-dark");
+            programmeElement.classList.add("text-dark");
             programmeElement.textContent = "None";
             programmesContainer.appendChild(programmeElement);
         }
-        } else {
+    } 
+    else {
         // doc.data() will be undefined in this case
-        console.log("No such document!");
+            console.log("No such document!");
         }
-	    // /...
-    }
+}
 
     var files = [];
     var proglab = document.getElementById("upprogress");

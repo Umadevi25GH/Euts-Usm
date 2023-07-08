@@ -11,6 +11,7 @@
   
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/FYP_5/static/Home.css">
+    <link rel="stylesheet" href="/FYP_5/static/programmes.css">
     <link rel="stylesheet" href="/FYP_5/static/resources.css">
 </head>
 
@@ -24,7 +25,7 @@
   gtag('config', 'G-JW8L099ZC4');
 </script>
 
-<header id="header" class="fixed-top d-flex align-items-center">
+<header id="header" class="sticky-top">
   <div class="container d-flex align-items-center">
       <!-- <a class="navbar-brand" href="#"> -->
       <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW"> 
@@ -44,31 +45,59 @@
           </li>
       </ul>
   </div>
-</header><!-- End Header -->
+</header><!-- End Header  -->
 <body>
+<div clas="container-fluid col-lg-10">
+    <div class="ccontainer-project my-5 px-3 py-5 row mt-5">
+      <h1 class="mb-0 pb-0">Resources</h1>
+      <h6> Below are latest list of resources to refer.</h6>
+    </div>
+    <div class="container-project my-5 px-3 py-5 col mt-5">
+      <div class="row">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Document Title</th>
+              <th>Contributor</th>            
+              <th>Date</th>
+              <th>Actions</th>
+              <!-- <th>Database ID</th> to be remove later -->
+            </tr>
+          </thead>
+          <tbody id="tbody1">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row-md-6 justify-content-lg-end">
+      <button type="button" class="btn1 add-row" data-bs-toggle="modal" data-bs-target="#file-modal">Add File</button>
+    </div>
+</div>
+<!-- 
 <div class="container-fluid col-lg-10">
   <div class="container-project my-5 px-3 py-5 row mt-5">
       <h1 class="mb-0 pb-0">List of Resources</h1>
       <h6> Below are latest list of training resources available</h6>
   </div>
-<!-- <div class="container w-100"> -->
+<div class="container w-100">
   <table class="table table-responsive">
     <thead>
       <tr>
         <th>No</th>
         <th>Document Title</th>
-        <!-- <th>Document URL</th> -->
+        <!-- <th>Document URL</th> 
         <th>Uploaded By</th>
         <th> Uploaded Date/Time </th>
         <th> Actions </th>
-        <!-- <th>Database ID</th> -->
+        <!-- <th>Database ID</th> 
       </tr>
     </thead>
     <tbody id="tbody1">
     </tbody>
     <td><button type="button" class="btn1 add-row" data-bs-toggle="modal" data-bs-target="#file-modal">Add File</button></td>
   </table>
-</div>
+</div> -->
 
 <!-- File View start -->
 <!-- File View end -->

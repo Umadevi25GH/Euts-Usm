@@ -20,7 +20,7 @@ else{
 }
 
 async function displayEmp(currentUser){
-    console.log("In User");
+    // console.log("In User");
     const uid = currentUser.uid;
     const docRef=doc(db, "employees", uid);
     const docSnap = await getDoc(docRef);
@@ -35,10 +35,10 @@ async function displayEmp(currentUser){
     const querySnapshot = await getDocs(collection(db, "pdf"));
     querySnapshot.forEach(async (doc) => {
         pdf.push(doc);
-        console.log(pdf);
-        console.log(doc.id, " => ", doc.data());
+        // console.log(pdf);
+        // console.log(doc.id, " => ", doc.data());
     });
-    console.log(pdf);
+    // console.log(pdf);
     AddAllItemsToTheTable(pdf);
 }
 
@@ -146,7 +146,7 @@ async function AddItemToTable(pdfName, pdfUrl, uploadBy, docid, secretKeyString)
     // var td4 = document.createElement("td");
 
     PdfList.push([pdfName, pdfUrl, uploadBy, docid]);
-    console.log(PdfList);
+    // console.log(PdfList);
     td0.innerHTML = ++pdfNo;
     td1.innerHTML = pdfName;
     td2.innerHTML = pdfUrl;
@@ -158,7 +158,7 @@ async function AddItemToTable(pdfName, pdfUrl, uploadBy, docid, secretKeyString)
     trow.appendChild(td2);
     trow.appendChild(td3);
     // trow.appendChild(td4);
-    console.log(docid);
+    // console.log(docid);
     var ControlDiv = document.createElement("div");
     
     // ControlDiv.innerHTML = `<button type="button" class="btn1 my-2 ml-2 viewBtn" id='${docid}' > View </button>`;
@@ -169,11 +169,10 @@ async function AddItemToTable(pdfName, pdfUrl, uploadBy, docid, secretKeyString)
 
 
 
-    console.log("controlDiv:", ControlDiv);
+    // console.log("controlDiv:", ControlDiv);
 
     trow.appendChild(ControlDiv);
     tbody1.appendChild(trow);
-    
     buttonListener(docid,ControlDiv, secretKeyString);
     // buttonListenerDel(docid);
 }
@@ -188,6 +187,57 @@ function AddAllItemsToTheTable(PdfList){
 
 
 // RESOURCE UPLOADING AND RETRIEVAL START
+
+var tbody2 = document.getElementById("tbody2");
+async function AddArcToTable(pdfName, DelDocReason, deletedBy, date){
+    var trow = document.createElement("tr");
+    var td0 = document.createElement("td");
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    // var td4 = document.createElement("td");
+
+    PdfList.push([pdfName, DelDocReason, deletedBy, date]);
+    // console.log(PdfList);
+    td0.innerHTML = pdfName;
+    td1.innerHTML = DelDocReason;
+    td2.innerHTML = deletedBy;
+    td3.innerHTML = date;
+    // td4.innerHTML = docid;
+
+    trow.appendChild(td0);
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    trow.appendChild(td3);
+    // trow.appendChild(td4);
+    // console.log(docid);
+    var ControlDiv = document.createElement("div");
+
+    trow.appendChild(ControlDiv);
+    tbody2.appendChild(trow);
+}
+
+
+var arcPdf = document.getElementById("arcPdf");
+arcPdf.addEventListener("click", async function(e) {
+    var pdf2 = [];
+
+    const querySnapshot = await getDocs(collection(db, "archive"));
+    querySnapshot.forEach(async (doc) => {
+        pdf2.push(doc);
+        console.log(pdf2);
+        console.log(doc.id, " => ", doc.data());
+    });
+
+    pdfNo = 0;
+    tbody2.innerHTML="";
+    pdf2.forEach(element => {
+        AddArcToTable(element.data().pdfName, element.data().DelDocReason, element.data().deletedBy, element.data().date);
+    });
+
+});
+
+
 
 
 //     if (uRole == 'Admin') {
@@ -269,36 +319,87 @@ upBtn.addEventListener('click',function(){
 
     // alert("masuk upload1");
     const storageRef = sRef(storage, "pdf/"+pdfName);
-    const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
-    uploadTask.on('state-changed',(snapshot) => {
-    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    proglab.innerHTML = "uploading " +  progress + "%";
-    },
-    (error) => {
-        alert("error: pdf not uploaded");
-    },
-    () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-               
-                //encryption function start
-                // Usage
-                const secretKey = generateSecretKey();
-                const secretKeyString = secretKeyToString(secretKey);
+    // Get a reference to the Firebase Storage bucket
 
-                console.log("Generated Secret Key: ", secretKeyString);
-                const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
-                
-                SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
+    getDownloadURL(storageRef)
+    .then(url => {
+        console.log("found: " + url);
+        alert("Resource has already in the system, Choose a different File");
+        return;
+    })
+    .catch(error => {
+        if (error.code === 'storage/object-not-found') {
+            console.log("not found");
+        
+            const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
+            uploadTask.on('state-changed',(snapshot) => {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            proglab.innerHTML = "uploading " +  progress + "%";
+            },
+            (error) => {
+                alert("error: pdf not uploaded");
+            },() => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                            
+                        
+                        //encryption function start
+                        // Usage
+                            const secretKey = generateSecretKey();
+                            const secretKeyString = secretKeyToString(secretKey);
 
-                const successEncBtn = document.getElementById("successEncBtn");
-                showSuccessModal();
-                // Function to show the success modal
-                function showSuccessModal() {
-                    successEncBtn.click();
-                }
-            });
-        },
-    );
+                            console.log("Generated Secret Key: ", secretKeyString);
+                            const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
+                            
+                            SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
+                            // // const successEncBtn = document.getElementById("successEncBtn");
+                            // // Add an event listener to the first modal's close button
+                            // const fileModalCloseButton = document.querySelector('#file-modal .btn-close');
+                            // fileModalCloseButton.addEventListener('click', function () {
+                            // // Use the hidden.bs.modal event to trigger the second modal
+                            // $('#successEnc').modal('show');
+                            // });
+
+                            // // showSuccessModal();
+                            // // // Function to show the success modal
+                            // // function showSuccessModal() {
+
+                            // //     successEncBtn.click();
+                            // // }
+                            const fileModal = new bootstrap.Modal(document.getElementById("file-modal"));
+                            fileModal.show();
+                            
+                            const successEncModal = new bootstrap.Modal(document.getElementById("successEnc"));
+                            showSuccessModal();
+                            function showSuccessModal() {
+                            // fileModal.remove(); // Hide the file-modal
+                            successEncModal.show(); // Show the successEnc modal
+                            }
+                            
+
+                            // Add a delay of 3 seconds (3000 milliseconds) before hiding the modal
+                            setTimeout(function() {
+                            fileModal.hide();
+                            removeModalBackdrop();
+                            }, 3000);
+
+                            // Function to remove the modal backdrop
+                            function removeModalBackdrop() {
+                            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+                            modalBackdrops.forEach(backdrop => {
+                                backdrop.parentNode.removeChild(backdrop);
+                            });
+                            }
+
+
+                        });
+                    }
+            );
+        // return Promise.resolve(false);
+        } else {
+            console.log("not found v2");
+            return Promise.reject(error);
+        }
+    });
 });
 
     //encryption function ends      
@@ -314,11 +415,7 @@ upBtn.addEventListener('click',function(){
         
         return !(allowedExtensions.test(extlab.value));
     }
-        // if (!allowedExtensions.exec(filePath)) {
-        //     alert('Invalid file type');
-        //     fileInput.value = '';
-        //     return false;
-        // }
+
     
 
 //
@@ -371,23 +468,21 @@ function buttonListener(docid,ControlDiv,secretKeyString){
                 
                 const modal = new bootstrap.Modal(document.getElementById("pdfModal"));
                 const pdfModalLabel = document.getElementById("pdfModalLabel");
+                const pdfModalbody = document.getElementById("bodyM");
+                
                 pdfModalLabel.innerHTML = docSnap.data().pdfName;
                 const pdfViewer = document.getElementById("pdfViewer1");
                 pdfViewer.src = decryptedURL;
                 var URltest = decryptedURL;
                 // var decryptedURL2 = URltest+="#toolbar=0";
-                var decryptedURL2 = URltest+="#toolbar=0&#contextmenu=false";
+                var decryptedURL2 = URltest+="#toolbar=0";
                 pdfViewer.src = decryptedURL2;
 
+                
+                pdfModalbody.addEventListener("contextmenu", (e) => {e.preventDefault()});
                 // Disable right-click context menu
-                function disableContextMenu() {
-                    var iframe = document.querySelector("iframe");
-                    iframe.oncontextmenu = function() {
-                    return false;
-                    };
-                }
+                
                 modal.show();
-                disableContextMenu();
             }
             else {
                 // doc.data() will be undefined in this case
@@ -454,6 +549,7 @@ function buttonListener(docid,ControlDiv,secretKeyString){
                         date: new Date(timestamp).toLocaleString(),
                         deletedBy: currentUser.email,
                         DelDocReason: delReason,
+                        pid:docid,
                         pdfUrl: pdfUrl
                     };
                     setDoc(arcRef, data)
@@ -545,6 +641,43 @@ signout.addEventListener("click", () =>{
 
 
 ///////////////// backup code //////////////////////////////
+// }
+    // const successEncBtn = document.getElementById("successEncBtn");
+    // showEncModal();
+    // // Function to show the success modal
+    // function showEncModal() {
+    //     successEncBtn.click();
+    // }
+
+// const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
+//     uploadTask.on('state-changed',(snapshot) => {
+//     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//     proglab.innerHTML = "uploading " +  progress + "%";
+//     },
+//     (error) => {
+//         alert("error: pdf not uploaded");
+//     },
+//     () => {
+//             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+            
+//                 //encryption function start
+//                 // Usage
+//                 const secretKey = generateSecretKey();
+//                 const secretKeyString = secretKeyToString(secretKey);
+
+//                 console.log("Generated Secret Key: ", secretKeyString);
+//                 const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
+                
+//                 SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
+//             });
+//             const successEncBtn = document.getElementById("successEncBtn");
+//             showSuccessModal();
+//             // Function to show the success modal
+//             function showSuccessModal() {
+//                 successEncBtn.click();
+//             }
+//         },
+//     );
 // // Create a reference to the file to delete collection
             // const delRef = doc(db, "pdf", docid);
             // // Create a reference to the file to delete storage

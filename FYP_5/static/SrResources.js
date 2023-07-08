@@ -9,6 +9,7 @@ import { ref, set, child, get, update, remove } from "https://www.gstatic.com/fi
 // Check user role on other pages
 const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
+            
 if (currentUser) {
   // User is an admin, perform admin actions
   // ...
@@ -271,36 +272,51 @@ upBtn.addEventListener('click',function(){
 
     // alert("masuk upload1");
     const storageRef = sRef(storage, "pdf/"+pdfName);
-    console.log("storageRef: ",storageRef);
-    const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
-    uploadTask.on('state-changed',(snapshot) => {
-    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    proglab.innerHTML = "uploading " +  progress + "%";
-    },
-    (error) => {
-        alert("error: pdf not uploaded");
-    },
-    () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-               
-                //encryption function start
-                // Usage
-                const secretKey = generateSecretKey();
-                const secretKeyString = secretKeyToString(secretKey);
+    getDownloadURL(storageRef)
+    .then(url => {
+        console.log("found: " + url);
+        alert("Resource has already in the system, Choose a different File");
+        return;
+    })
+    .catch(error => {
+        if (error.code === 'storage/object-not-found') {
+            console.log("not found");
+        
+            const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
+            uploadTask.on('state-changed',(snapshot) => {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            proglab.innerHTML = "uploading " +  progress + "%";
+            },
+            (error) => {
+                alert("error: pdf not uploaded");
+            },() => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                            
+                        
+                        //encryption function start
+                        // Usage
+                            const secretKey = generateSecretKey();
+                            const secretKeyString = secretKeyToString(secretKey);
 
-                console.log("Generated Secret Key: ", secretKeyString);
-                const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
-                
-                SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
-                const successEncBtn = document.getElementById("successEncBtn");
-                showSuccessModal();
-                // Function to show the success modal
-                function showSuccessModal() {
-                    successEncBtn.click();
-                }
-            });
-        },
-    );
+                            console.log("Generated Secret Key: ", secretKeyString);
+                            const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
+                            
+                            SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
+                            const successEncBtn = document.getElementById("successEncBtn");
+                            showSuccessModal();
+                            // Function to show the success modal
+                            function showSuccessModal() {
+                                successEncBtn.click();
+                            }
+                        });
+                    }
+            );
+        // return Promise.resolve(false);
+        } else {
+            console.log("not found v2");
+            return Promise.reject(error);
+        }
+    });
 });
 
     //encryption function ends      
@@ -335,7 +351,9 @@ upBtn.addEventListener('click',function(){
             console.log("Document existed ");
 
         } else {
-            const timestamp = Date.now();
+            const timestamp = new Date();
+            // alert("timestamp1: " + timestamp1.toLocaleDateString());
+
             const docRef = await addDoc(collection(db, "pdf"),{
                 pdfName: name+ext,
                 pdfUrl: encryptedURL,
@@ -446,7 +464,7 @@ function buttonListener(docid,ControlDiv){
                     console.log("pdfName: ", DelDocName);
                     console.log("pdfUrl: ", docSnap.data().pdfUrl);
                     console.log("Reason: ", DelDocReason.value);
-                    const timestamp = Date.now();
+                    const timestamp = Date;
                     const arcRef = doc(db, "archive", docid);
                     const data = {
                         pdfName: pdfName,
@@ -545,331 +563,36 @@ signout.addEventListener("click", () =>{
 })
 
 
-
-
-
-
-
-
-
-
 ///////////////// backup code /////////////////////////////
-// if (docSnap.exists()) {
-//     if (pdfF){
-//         alert("pdf in");
-//         console.log(docSnap.data().pdfUrl);
-    
-//         var pdfWindow = window.open(docSnap.data().pdfUrl, "blank");
-//         pdfWindow.focus();
-
-//         pdfF.src = docSnap.data().pdfUrl;
-//     }
-//     else {
-//         console.log("pdf not valid"); 
-//     }
-// }
-// else {
-//     // doc.data() will be undefined in this case
-//     console.log("No such document!");
-// }    
 
 
+// console.log("storageRef: ",storageRef);
+// const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
+// uploadTask.on('state-changed',(snapshot) => {
+// var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+// proglab.innerHTML = "uploading " +  progress + "%";
+// },
+// (error) => {
+//     alert("error: pdf not uploaded");
+// },
+// () => {
+//         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+           
+//             //encryption function start
+//             // Usage
+//             const secretKey = generateSecretKey();
+//             const secretKeyString = secretKeyToString(secretKey);
 
-                    // var viewerOptions = {
-                    //     viewerPrefs:{
-                    //         disablePrint: true,
-                    //         disableDownload: true
-                    //     }
-                    // }
-                    // pdfjsLib.getDocument(docSnap.data().pdfUrl).promise.then(function (pdfDoc){
-                    //     var viewerContainer = window.open('','_blank');
-                    //     pdfDoc.getPage(1).then(function(page){
-                    //         var canvas = document.createElement('canvas');
-                    //         var viewport = page.getViewport({scale: 1});
-                    //         var context = canvas.getContext('2d');
-                    //         canvas.width = viewport.width;
-                    //         canvas.height = viewport.height;
-                    //         page.render({canvasContext: context, viewport:viewport}).promise.then(function(){
-                    //             viewerContainer.document.body.appendChild(canvas);
-                    //         });
-                    //     });
-                    // });
-                    // window.open(docSnap.data().pdfUrl)
-                    
-                    // win.onload = () =>{
-                    //     win.document.body.style.background='#999';
-                    //     console.log(docSnap.data().pdfUrl)
-                        // pdfjsLib.getDocument(docSnap.data().pdfUrl).promise.then(pdfDoc=>{
-                        //     console.log(pdfDoc)
-                        // }).catch(pdfErr=>{
-                        //     console.log(pdfErr)
-                        // })
-                    // }
-
-
-
-                    // var pdfUrl = docSnap.data().pdfUrl;
-                    
-                    // var pdfViewerContainer = document.getElementById('pdf-viewer');
-                    // alert("in pdfViewerContainer");
-
-                    // // Load the PDF document
-                    // pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-                    //     // Set up the viewer options
-                    //     var viewerOptions = {
-                    //         // Restrict downloading of the PDF
-                    //         download: false,
-                            
-                    //         // Restrict printing of the PDF
-                    //         print: false
-                    //     };
-
-                    //     // Create the PDF viewer instance
-                    //     var pdfViewer = pdfjsLib.createViewer({
-                    //         container: pdfViewerContainer,
-                    //         viewerOptions: viewerOptions
-                    //     });
-
-                    //     // Set the PDF document to the viewer
-                    //     pdfViewer.setDocument(pdf);
-
-                    //     // Initialize the viewer
-                    //     pdfViewer.initializedPromise.then(function() {
-                    //         // Automatically resize the viewer to fit its container
-                    //         pdfViewer.currentScaleValue = 'page-fit';
-                    //     });
-                    // });
-                    // if (pdfF){
-                    //     alert("pdf in");
-                    //     console.log(docSnap.data().pdfUrl);
-                    
-                    //     var pdfWindow = window.open(docSnap.data().pdfUrl, "blank");
-                    //     pdfWindow.focus();
-
-                    //     pdfF.src = docSnap.data().pdfUrl;
-                    // }
-                    // else {
-                    //     console.log("pdf not valid"); 
-                    // }
-
-//download
-    // async function SaveURLtoFirestore(URL){
-
-    //     const uNameRef=doc(db, "employees", uid);
-	//     const docSnap = await getDoc(uNameRef);
-    //     if (docSnap.exists()) {
-    //         console.log("Document data:", docSnap.data());
-    //         console.log(docSnap.id);//firebase document id
-    //         const uName = docSnap.data().name;
-    //         var name = namebox.value;
-    //         var ext = extlab.innerHTML;
-    //         const docRef = doc(db, "pdf",uid);
-    //         const data = {
-    //             pdfName: name+ext,
-    //             pdfUrl: URL,
-    //             uploadBy: uName
-    //         };
-
-    //         console.log(data);
-    //         setDoc(docRef, data)
-    //         .then(() => {
-    //             console.log("Document has been added successfully");
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // }
-
-
-// onAuthStateChanged(auth, async (user) => {
-//     if (user) {
-//         const uid = user.uid
-//         upBtn.addEventListener('click',function(){
-//             var pdfToUpload = files[0];
-//             var pdfName = namebox.value + extlab.innerHTML;
-
-//             if(!ValidateName()){
-//                 alert('pdf file name cannot contain "#", "$", "[", ",]"');
-//                 return;
-//             }
-
-//             const metaData = {
-//                 contentType: pdfToUpload.type,
-//             };
-
-//             alert("masuk upload1");
-//             const storageRef = sRef(storage, "pdf/"+pdfName);
-//             const uploadTask = uploadBytesResumable(storageRef, pdfToUpload, metaData);
-//             // uploadTask.on('state-changed',(snapshot) => {
-//             //     // var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//             //     // proglab.innerHTML = "uploading " +  progress + "%";
-//             // },
-//             // (error) => {
-//             //     alert("error: pdf not uploaded");
-//             // },
-//             // () => {
-//             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-//                 SaveURLtoFirestore(downloadURL,uid);
-//             });
-//             // });
-//             upBtn.click();
-//         });
-//     } else { console.log("user not logged in"); }
-// });
-
-
-
-//view file start
-// function buttonListener(docid){
-//     const pdfF = document.getElementById("pdfViewer");
-
-//     let viewBtn=document.querySelector(`[id="${docid}"]`);
-//     console.log("view: ", viewBtn);
-//     viewBtn.addEventListener('click', async () => {
-
-//         const viewRef = doc(db, "pdf", docid);
-//         const docSnap = await getDoc(viewRef);
-
-//         if (docSnap.exists()) {
-//             if (pdfF){
-//                 alert("pdf in");
-//                 console.log(docSnap.data().pdfUrl);
-//                 pdfF.src = docSnap.data().pdfUrl;
-//             }
-//             else {
-//                 console.log("pdf not valid"); 
-//             }
-//         }
-//         else {
-//             // doc.data() will be undefined in this case
-//             console.log("No such document!");
-//         }    
-//     });
-// }
-//view file end
-
-
-// remFile start
-
-// $('input[type="button"]').click(function(e){
-//         $(this).closest('tr').remove()
-//     })
-
-
-//del file start
-// function buttonListenerDel(docid){
-
-//     let delBtn=document.querySelector(`[id="${docid}"]`);
-//     console.log("del: ", delBtn);
-//     delBtn.addEventListener('click', async () => {
-
-//         alert('You clicked the delete button');
-
-//         // Create a reference to the file to delete collection
-//         const delRef = doc(db, "pdf", docid);
-//         // Create a reference to the file to delete storage
-//         const desertRef = sRef(storage, "pdf/"+docid.pdfName);
-//         console.log("Pdf to Del: ", docid.pdfName);
-
-//         // Delete the file
-//         deleteObject(desertRef).then(() => {
-//             // File deleted successfully
-//         }).catch((error) => {
-//             // Uh-oh, an error occurred!
-//         });
-
-//         const docSnap = await getDoc(delRef);
-
-//         if (docSnap.exists()) {
-//             deleteDoc(delRef)
-//             .then(() => {
-//                 console.log("Document has been deleted successfully");
-//             })
-//             .catch(error => {
-//                 console.log(error);
-//             })
-//         }
-//         else {
-//             // doc.data() will be undefined in this case
-//             console.log("No such document!");
-//         }
-//     });
-// }
-
-// delete document end
-
-
-
-
-
-
-// let viewBtn=document.querySelector(`[id="${docid}"]`);
-
-// // Add click event listener to the view button
-//     viewBtn.addEventListener('click', async function() {
-//         console.log(`View button clicked with id:`, docid);
-
-//         const pdfF = document.getElementById("pdfViewer");
-//         console.log("view: ", viewBtn);
-
-//         const viewRef = doc(db, "pdf", docid);
-//         const docSnap = await getDoc(viewRef);
-
-//             if (docSnap.exists()) {
-//                 if (pdfF){
-//                     alert("pdf in");
-//                     console.log(docSnap.data().pdfUrl);
-//                     pdfF.src = docSnap.data().pdfUrl;
-//                 }
-//                 else {
-//                     console.log("pdf not valid");
-//                 }
-//             }
-//             else {
-//                 // doc.data() will be undefined in this case
-//                 console.log("No such document!");
+//             console.log("Generated Secret Key: ", secretKeyString);
+//             const encryptedURL = encryption(downloadURL, secretKeyString); //return a data object
+            
+//             SaveURLtoFirestore(encryptedURL, uid, secretKeyString);
+//             const successEncBtn = document.getElementById("successEncBtn");
+//             showSuccessModal();
+//             // Function to show the success modal
+//             function showSuccessModal() {
+//                 successEncBtn.click();
 //             }
 //         });
-
-//     // let delBtn=document.querySelector(`[id="${docid}"]`);
-//     // Add click event listener to the delete button
-//     delBtn.addEventListener('click', async function() {
-//         console.log(`Delete button clicked with id:`, docid);
-
-//         console.log("del: ", delBtn);
-//         // Create a reference to the file to delete collection
-//         const delRef = doc(db, "pdf", docid);
-//         // Create a reference to the file to delete storage
-//         const desertRef = sRef(storage, "pdf/"+docid.pdfName);
-//         console.log("Pdf to Del: ", docid.pdfName);
-
-//         // Delete the file
-//         deleteObject(desertRef).then(() => {
-//             // File deleted successfully
-//         }).catch((error) => {
-//             // Uh-oh, an error occurred!
-//         });
-
-//         const docSnap = await getDoc(delRef);
-
-//         if (docSnap.exists()) {
-//             deleteDoc(delRef)
-//             .then(() => {
-//                 console.log("Document has been deleted successfully");
-//             })
-//             .catch(error => {
-//                 console.log(error);
-//             })
-//         }
-//         else {
-//             // doc.data() will be undefined in this case
-//             console.log("No such document!");
-//         }
-//     });
-//   // Perform the delete action here
-// }
-
+//     },
+// );

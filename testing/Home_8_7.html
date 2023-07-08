@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Upskilling Training System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <!-- Favicons -->
+  <link href="/FYP_5/images/img/title.png" rel="icon">
+  <link href="/FYP_5/images/img/title.png" rel="title">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/FYP_5/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/FYP_5/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/FYP_5/static/Home.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW8L099ZC4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JW8L099ZC4');
+</script>
+
+<header id="header" class="sticky-top">
+  <div class="container d-flex align-items-center">
+    <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW">
+    <ul class = "nav nav-pills ms-auto justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active1 text" aria-current="page" href="/FYP_5/templates/Home.html" id="nav-link-home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text" aria-current="page" href="/FYP_5/templates/login.html" id="nav-link-home">Login</a>
+      </li>
+    </ul>
+  </div>
+</header><!-- End Header -->
+
+<body>
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+    <div class="carousel-inner" role="listbox">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active" style="background-image: url(/FYP_5/images/img/slide/slide-1.jpg)">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Employee Upskilling Training System</span></h2>
+            <p class="animate__animated animate__fadeInUp">Technology has significantly impacted our personal and professional lives over the past few years. Particularly for enterprises, the use of technology in the workplace has fundamentally altered customer expectations and operational procedures. Therefore, technology's importance in the workplace has become crucial to every modern organisation's success.</p>
+            <!-- <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="background-image: url(/FYP_5/images/img/slide/slide-2.jpg)">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">EUTS</h2>
+            <p class="animate__animated animate__fadeInUp">Employers are advancing their employees in every sector as the world demands 
+              high-tech solutions to support business processes.</p>
+            <!-- <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" style="background-image: url(/FYP_5/images/img/slide/slide-3.jpg)">
+        <div class="carousel-container">
+          <div class="container">
+            <h2 class="animate__animated animate__fadeInDown">Objective</h2>
+            <p class="animate__animated animate__fadeInUp">Our Employee Upskilling Training System is designed to help our employees improve their skills and knowledge in order to grow and advance in their careers. We offer a wide range of courses on various topics, including communication skills, 
+              leadership development, and technical training.</p>
+            <!-- <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+
+  </div>
+</section><!-- End Hero -->
+
+ 
+<!-- The login modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="modal-header bg-light-blue text-white">
+        <h5 class="modal-title" style="color: black;" id="loginModalLabel">Login to EUTS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Left column for company logo -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+              <img src="/FYP_5/static/logoBnW (6).png" alt="Company Logo" class="img-fluid">
+            </div>
+
+            <!-- Right column for login form -->
+            <div class="col-md-6">
+              <form>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" id="password" class="form-control" id="password" placeholder="Enter password" autocomplete="on">
+                </div>
+                <div class="text-center">
+                  <button type="button" id="login" class="btn1">Login</button>
+                </div>
+              </form>
+
+              <div class="text-center mt-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#forget-password-modal" class="text-decoration-none">Forgot Password</a>
+              </div>
+              <div class="text-center mt-1">
+                Don't have an account? </br>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#newAcc-modal" class="text-decoration-none">Contact admin</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- request new account start -->
+<div class="modal fade" id="newAcc-modal" tabindex="-1" aria-labelledby="file-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="file-modal-label">Request for Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="request-user-form" class="needs-validation" novalidate>
+                <div class="col-lg-12">
+                    <h5>Account Information</h5>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="emailR" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="emp-id">Employee ID</label>
+                    <input type="number" class="form-control" id="emp-idR" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="message">Message</label>
+                    <input type="text" class="form-control" id="messageR" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <!-- chnage to radio button -->
+                    <label for="role">Role</label>
+                    <select class="form-control" id="roleR" required>
+                        <option>Director</option>
+                        <option>Manager</option>
+                        <option>Senior Executive</option>
+                        <option>Executive</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn1" id="reqUser" >Submit Request</button>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- request new account end -->
+
+<!-- Forget Password Modal -->
+<div class="modal fade" id="forget-password-modal" tabindex="-1" aria-labelledby="forget-password-modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="forget-password-modalLabel">Forget Password</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="forget-password-form">
+          <div class="mb-3">
+          <label for="emailf" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="resetEmail" name="emailf" required>
+          </div>
+          <div class="mb-3">
+          <label for="employee-id" class="form-label">Employee ID</label>
+          <input type="text" class="form-control" id="Femployee-id" name="employee-id" required>
+          </div>
+          <button id="reset" type="submit" class="btn1">Request Password Reset</button>
+      </form>
+      </div>
+  </div>
+  </div>
+</div>
+
+<!-- don't have account Modal -->
+<div class="modal fade" id="no-account-modal" tabindex="-1" aria-labelledby="no-account-modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="no-account-modalLabel">Contact Admin</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="no-account-form">
+          <div class="mb-3">
+          <label for="emailNA" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="emailNA" name="emailNA" required>
+          </div>
+          <div class="mb-3">
+          <label for="employee-id" class="form-label">Employee ID</label>
+          <input type="text" class="form-control" id="employee-id" name="employee-id" required>
+          </div>
+          <button id="newACC" type="submit" class="btn1">Send request</button>
+      </form>
+      </div>
+  </div>
+  </div>
+</div>
+
+<!-- Button to trigger the encrypt modal start-->
+<button id="inactiveBtn" type="button" class="btn btn-primary" style="display: none;"  data-bs-toggle="modal" data-bs-target="#inactiveBtnM">
+</button>
+<!-- warnings modals -->
+<div class="modal" id="inactiveBtnM" tabindex="-1" aria-labelledby="inactiveBtnLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Inactive Member!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning align-items-center" role="alert">
+          <p style="font-size: medium;">Sorry, you're not an active member.
+            <a href="#" data-bs-toggle="modal" data-bs-target="#newAcc-modal" class="text-decoration-none">Click here</a> 
+            to send request to System Admin.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- warnings modals -->
+
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="row">
+      <div class="footer-info col-md-4">
+          <h3>Employee Upskilling Training System</h3>
+          <p>
+          EUTS Group <br>
+          11800, Penang<br><br>
+          <strong>Phone:</strong> +04 12345678<br>
+          <strong>Email:</strong> eutsusm@gmail.com<br>
+          </p>
+      </div>
+      <div class="col-md-8 text-end">
+          <img src="/FYP_5/static/logoBnW (1).png" alt="" width="20%" height="80%">
+      </div>
+  </div>
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Employee Upskilling Training System</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+      Designed by <a href="https://github.com/Umadevi25GH">STU</a>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+
+<!-- Vendor JS Files -->
+<script src="/FYP_5/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/FYP_5/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/FYP_5/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/FYP_5/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/FYP_5/assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="/FYP_5/assets/vendor/php-email-form/validate.js"></script>
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- Template Main JS File -->
+<script type="module" src="/FYP_5/static/Home.js"></script>
+</body>
+</html>

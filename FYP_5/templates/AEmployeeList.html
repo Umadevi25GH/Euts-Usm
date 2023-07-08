@@ -96,11 +96,11 @@
 
 <!--new dynamic employee listing start-->
 <div class="container-fluid col-lg-10">
-    <div class="container-project my-5 px-3 py-5 row mt-5">
-        <h1 class="mb-0 pb-0">Employees Management</h1>
+    <div class="container-project my-5 px-3 row mt-5">
+        <h1 class="mb-0 pb-0 mt-5">Employees Management</h1>
         <h6> Below are latest list of active employees</h6>
     
-    <table id="employeeTable" class="table table-striped my-5 px-5 py-5">
+    <table id="employeeTable" class="table table-striped mt-5 mb-0 px-5 py-3">
         <thead>
         <tr>
             <th>No</th>
@@ -114,13 +114,10 @@
         <tbody id="tbody2"></tbody>
     </table>
     </div>
-    <div class="container-project px-3">
+    <div class="col-md-6 justify-content-lg-end pt-0">
         <button type="button" class="btn1 add-col" data-bs-toggle="modal" data-bs-target="#emp-modal">Add New Employee</button>
-    </div>
-    <div class="container-project px-3">
         <button type="button" class="btn1 show-inactive" data-bs-toggle="modal" data-bs-target="#emp-Inactive">Show Inactive Employee</button>
     </div>
-    
     <div id="employeeCards"></div>
 </div>
 <!--new dynamic employee listing end-->
@@ -419,7 +416,7 @@
           <table class="table">
             <thead>
               <tr>
-                <!-- <th>No</th> -->
+                <!-- <th>No</th>  -->
                 <th>Name</th>
                 <th>Email</th>
                 <th>Status</th>

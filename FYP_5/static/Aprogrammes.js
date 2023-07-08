@@ -31,20 +31,22 @@ async function displayEmp(currentUser){
     }
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
+
     var prog = [];
 
     const querySnapshot = await getDocs(collection(db, "programmes"));
     querySnapshot.forEach(async (doc) => {
         prog.push(doc);
-        console.log(prog);
-        console.log(doc.id, " => ", doc.data());
+        // console.log(prog);
+        // console.log(doc.id, " => ", doc.data());
     });
     generateAllProgramCards(prog);
 
     // var empProg = [];
-    // const snapshot = await getDocs(collection(db, "employees"));
-    // snapshot.forEach(async (doc) => {
+    // const querySnapshot = await getDocs(collection(db, "employees"));
+    // querySnapshot.forEach(async (doc) => {
     //     empProg.push(doc);
+    //     console.log("Document: ",doc);
     // });
     // generateAllEmpProgramCards(empProg);
 
@@ -147,133 +149,154 @@ var progNo = 0;
 const programCardsContainer = document.getElementById("programCards");
 const programCardsModal = document.getElementById("programModal1");
 var progList = [];
+
 //https://getbootstrap.com/docs/5.0/components/card/
 function generateProgramCards(title,category,introduction,description,imgUrl,eDate,sDate,pid) {
     progList.push([title, category, introduction, description, imgUrl, eDate, sDate, pid]);
-    // console.log("check:",progList);
-    
-    // Create card element row
-    // const card = document.createElement("div");
-    // card.className = "row align-items-start project-container py-1 my-3 mx-3 col-md-4";
-
     // Create card element col
-    const card = document.createElement("div");
-    // card.className = "project-container py-1 my-3 mx-3 col-md-4";
-    card.className = " project-container col-md-4";
+    // const card = document.createElement("div");
+    // // card.className = "project-container py-1 my-3 mx-3 col-md-4";
+    // card.className = " project-container col-md-4";
+    console.log("list> ",progList);
+        const card = document.createElement("div");
+        card.className = "card col-md-4 p-4 cardProg";
 
-    // Create card body
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+        // Create card body
+        const cardTop = document.createElement("div");
+        cardTop.className = "row cardTop";
+        
+        const cardT1 = document.createElement("div");
+        cardT1.className = "col-md-10 cardTitle";
 
-    // Create card title
-    const cardTitle = document.createElement("h3");
-    cardTitle.className = "card-title";
-    cardTitle.textContent = title.toUpperCase();
+        const cardContent = document.createElement("div");
+        cardContent.className = "row-md-3 cardContent";
 
-    // const cardTitle2 = document.getElementById("prog-title2");
-    // const cardTitle3 = document.getElementById("prog-title3");
-    // // cardTitle.className = "card-title";
-    // console.log("cardtitle2:",title);
-    // cardTitle2.textContent = title;
-    // cardTitle3.innerHTML = title;
+        const cardBottom = document.createElement("div");
+        cardBottom.className = "row-md-3 mt-3 cardBottom";    
 
-    // Create card category
-    const cardCategory = document.createElement("p");
-    cardCategory.className = "card-text";
-    cardCategory.textContent = "Category: " + category;
-    // cardCategory.textContent = category;
+        // Create card title
+        const cardTitle = document.createElement("h6");
+        cardTitle.className = "card-title fw-bolder fw-uppercase";
+        cardTitle.textContent = title.toUpperCase();
 
-    // const cardCategory2 = document.getElementById("prog-category2");
-    // // cardCategory.className = "card-text";
-    // cardCategory2.textContent = category;
+        // cardTitle.textContent = title.toUpperCase();
 
+        // Create card category
+        const cardCategory = document.createElement("h6");
+        cardCategory.className = "card-text";
+        cardCategory.textContent = "Category: " +category;
 
-    // Create card description
-    const cardDescription = document.createElement("h5");
-    cardDescription.className = "card-text";
-    cardDescription.textContent = description;
+        // Create card description
+        const cardDescription = document.createElement("h6");
+        cardDescription.className = "card-text";
+        cardDescription.textContent = description;
 
-    // const cardDescription2 = document.getElementById("prog-description");
-    // // cardDescription.className = "card-text";
-    // cardDescription2.textContent = description;
+        // Create card introduction
+        const cardIntro = document.createElement("h6");
+        cardIntro.className = "card-text";
+        cardIntro.textContent = introduction;
 
+        // Create card image
+        const cardImage = document.createElement("img");
+        cardImage.className = "card-img";
+        cardImage.src = imgUrl;
 
-    // Create card introduction
-    const cardIntro = document.createElement("h5");
-    cardIntro.className = "card-text";
-    cardIntro.textContent = introduction;
+        // Create card sDate
+        const cardsDate = document.createElement("p");
+        cardsDate.className = "card-text";
+        cardsDate.textContent ="Start Date: " + sDate;
 
-    // const cardIntro2 = document.getElementById("prog-introduction2");
-    // // cardIntro.className = "card-text";
-    // cardIntro2.textContent = introduction;
-
-    // Create card image
-    const cardImage = document.createElement("img");
-    cardImage.className = "card-img";
-    // cardImage.className = "card-text";
-    cardImage.src = imgUrl;
-
-    // const cardImage2 = document.getElementById("prog-img2");
-    // // cardImage.className = "card-text";
-    // cardImage2.src = imgUrl;
-
-    // Create card sDate
-    const cardsDate = document.createElement("p");
-    cardsDate.className = "card-text";
-    cardsDate.textContent ="Start Date: " + sDate;
-
-    // const cardsDate2 = document.getElementById("prog-start2");
-    // // cardsDate2.className = "card-text";
-    // cardsDate2.textContent = sDate;
-
-    // Create card eDate
-    const cardeDate = document.createElement("p");
-    cardeDate.className = "card-text";
-    cardeDate.textContent ="End Date: " + eDate;
-
-    // const cardeDate2 = document.getElementById("prog-end2");
-    // // cardeDate.className = "card-text";
-    // cardeDate2.textContent = eDate;
+        // Create card eDate
+        const cardeDate = document.createElement("p");
+        cardeDate.className = "card-text";
+        cardeDate.textContent ="End Date: " + eDate;
 
 
-    // Create card button to trigger modal
-    const cardButton = document.createElement("button");
-    cardButton.className = "btn1";
-    cardButton.textContent = "Learn More";
-    
-    // Create card button to Apply
-    const applyButton = document.createElement("button");
-    applyButton.className = "btn1";
-    applyButton.textContent = "Apply";
+        // Create card button to trigger modal
+        const cardButton = document.createElement("button");
+        cardButton.className = "btn1 px-2 py-2";
+        cardButton.id = "cardButton";
+        cardButton.textContent = "Learn More";
+        
+        // Create card button to Apply
+        const applyButton = document.createElement("button");
+        applyButton.className = "btn1 px-2 py-2 applyBtn";
+        applyButton.id = pid;
+        applyButton.textContent = "Apply";
 
-    // Create card button to Apply
-    const delProgButton = document.createElement("button");
-    delProgButton.className = "btn1";
-    delProgButton.textContent = "Remove";
-    
-    // Append elements to card body
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardCategory);
-    cardBody.appendChild(cardIntro);
-    
-    // cardBody.appendChild(cardDescription);
-    
-    cardBody.appendChild(cardButton);
-    cardBody.appendChild(applyButton);
-    cardBody.appendChild(delProgButton);
+        // Create card button to participants
+        const partiButton = document.createElement("button");
+        partiButton.className = "btn1 px-2 py-2 partiBtn";
+        partiButton.id = pid;
+        partiButton.textContent = "Participants";
 
-    // Append card body to card
-    card.appendChild(cardBody);
+        // Create card button to Apply
+        const delProgButton = document.createElement("button");
+        delProgButton.className = "btn1 px-2 py-2 delBtn";
+        delProgButton.id = pid;
+        delProgButton.textContent = "Remove";
+   
+        // Append elements to card body
+        cardT1.appendChild(cardTitle);
+        cardTop.appendChild(cardT1);
 
-    // Get the programCards container
+        cardContent.appendChild(cardCategory);
+        cardContent.appendChild(cardIntro);
+        
+        // cardBody.appendChild(cardDescription);
+        
+        cardBottom.appendChild(cardButton);
+        cardBottom.appendChild(applyButton);
+        cardBottom.appendChild(partiButton);
+        cardBottom.appendChild(delProgButton);
+        
+
+        // Append card body to card
+        card.appendChild(cardTop);
+        card.appendChild(cardContent);
+        card.appendChild(cardBottom);
+
+        buttonListener(pid, cardBottom);
+        // cards.push(card);
+    // // Get the programCards container
     const programCardsContainer = document.getElementById("programCards");
 
     // Append the card to the programCards container
     programCardsContainer.appendChild(card);
 
+    // Get the programCards container
+    // const programCardsContainer = document.getElementById("programCards");
+
+    // // Create a row container for each row
+    // const rowContainers = [];
+    // // const cards = [card1, card2, card3, card4]; // Add all the cards to this array
+
+    // const cardsPerRow = 2; // Define the number of cards per row
+
+    // for (let i = 0; i < cards.length; i ++) {
+    // const rowContainer = document.createElement("div");
+    // rowContainer.classList.add("row");
+
+    // const rowCards = cards.slice(i, i + cardsPerRow);
+
+    // rowCards.forEach((card) => {
+    //     rowContainer.appendChild(card);
+    // });
+
+    // rowContainers.push(rowContainer);
+    // }
+
+    // Append the row containers to the programCards container
+    // cards.forEach((rowContainer) => {
+    //     programCardsContainer.appendChild(rowContainer);
+    // });
+
+
+
+
     // Append card to container
     // programCardsContainer.appendChild(card);
-
+    // const cardButton = document.getElementById('cardButton');
     cardButton.addEventListener("click", function() {
         const modal = document.createElement("div");
         modal.className = "modal fade";
@@ -291,10 +314,10 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         const modalHeader = document.createElement("div");
         modalHeader.className = "modal-header";
         
-        const modalTitle = document.createElement("h2");
-        modalTitle.className = "modal-title";
+        const modalTitle = document.createElement("h6");
+        modalTitle.className = "card-title fw-bolder";
         modalTitle.id = "programModalLabel";
-        modalTitle.textContent = title;
+        modalTitle.textContent = title.toUpperCase();
         
         const closeButton = document.createElement("button");
         closeButton.type = "button";
@@ -305,7 +328,7 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         const modalBody = document.createElement("div");
         modalBody.className = "modal-body";
         
-        cardImage.style.maxWidth = "100%";
+        cardImage.style.maxWidth = "50%";
         cardImage.style.height = "auto";
         modalBody.appendChild(cardDescription);
         modalBody.appendChild(cardImage);
@@ -325,59 +348,130 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         const bootstrapModal = new bootstrap.Modal(modal);
         bootstrapModal.show();
     });
-    
-    applyButton?.addEventListener('click', async function() {        
-        //add in to employees document
-        const empRef = doc(db, "employees", currentUser.uid);
-        const progRef = doc(db, "programmes", pid);
-        const docSnap = await getDoc(progRef);
 
-        if (docSnap.exists()) {
-            const programme = {
-                title: docSnap.data().title,
-                category: docSnap.data().category
-            };
-            updateDoc(empRef, {
-                'programmes': arrayUnion(programme)
-            })
-            .then(() => {
-                console.log("programmes has been updated successfully");
+}
 
-                const applyProgBtn = document.getElementById("applyProgBtn");
-                showModal(applyProgBtn);
-                function showModal(element) {
-                    element.click();
-                }
-            })
-            .catch(error => {
-                console.log('Error adding new programme:', error);
-            });
+function buttonListener(pid, cardBottom) {
+    console.log("in buttonListener");
+    cardBottom.addEventListener("click", async e => {
+        if(e.target.classList.contains("applyBtn") && e.target.id === `${pid}`)
+        {
+            console.log("Apply: " + pid);
+            const empRef = doc(db, "employees", currentUser.uid);
+            const progRef = doc(db, "programmes", pid);
+            const docSnap = await getDoc(progRef);
+            const docSnap2 = await getDoc(empRef);
+
+            if (docSnap.exists()) {
+                const employee = {
+                    emp_id: docSnap2.data().emp_id,
+                    name: docSnap2.data().name
+                };
+                const programme = {
+                    title: docSnap.data().title,
+                    category: docSnap.data().category
+                };
+                updateDoc(progRef, {
+                    'applied': arrayUnion(employee)
+                })
+                .then(() => {
+                    console.log("programmes has been updated successfully");
+
+                })
+                .catch(error => {
+                    console.log('Error adding new programme:', error);
+                });
+                updateDoc(empRef, {
+                    'programmes': arrayUnion(programme)
+                })
+                .then(() => {
+                    console.log("programmes has been updated successfully");
+
+                    const applyProgBtn = document.getElementById("applyProgBtn");
+                    showModal(applyProgBtn);
+                    function showModal(element) {
+                        element.click();
+                    }
+                })
+                .catch(error => {
+                    console.log('Error adding new programme:', error);
+                });
+            }
         }
-    });
+        else if(e.target.classList.contains("delBtn") && e.target.id === `${pid}`)
+        {
+            console.log("Delete: ", pid);
+            const progRef = doc(db, "programmes", pid);
+            const docSnap = await getDoc(progRef);
+            if (docSnap.exists()) {
+                console.log("Programmes to be deleted: " + docSnap.title);
 
-    delProgButton?.addEventListener('click', async function() {        
-        //add in to employees document
-        // const empRef = doc(db, "employees", currentUser.uid);
-        const progRef = doc(db, "programmes", pid);
-        const docSnap = await getDoc(progRef);
-        const newProgrammes = docSnap.data().title;
-        
-        if (docSnap.exists()) {
-            deleteDoc(progRef)
-            .then(() => {
-                alert("Programme has been deleted successfully");
-            })
-            .catch(error => {
-                console.log("Error deleting programme: ", error);
-            })
+                deleteDoc(progRef)
+                .then(() => {
+                    const delProgBtn = document.getElementById("DelProgBtn");
+                    showModal(delProgBtn);
+                    function showModal(element) {
+                        element.click();
+                    }
+                })
+                .catch(error => {
+                    console.log("Error deleting programme: ", error);
+                })
+            }
+            else {
+                console.log("No such document!");
+            }
         }
-        else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+        else if(e.target.classList.contains("partiBtn") && e.target.id === `${pid}`)
+        {
+            console.log(" masuk parti!"+pid);
+            const progRef = doc(db, "programmes", pid);
+            const docSnap = await getDoc(progRef);
+
+            if (docSnap.exists()) {
+            // console.log(" masuk parti 1", docSnap.data());
+            // console.log(" masuk parti 2", docSnap.data().applied);
+            // const employeeCardsModal = document.getElementById("programModal1");
+            var empNo = 0;
+            var empPrg = [];
+            var tbody = document.getElementById("empProgTableBody");
+            // const modal = new bootstrap.Modal(document.getElementById("emp-Applied"));
+            const modal = new bootstrap.Modal(document.getElementById("emp-Applied"));
+            modal.show();
+            const emps = docSnap.data().applied;
+            tbody.innerHTML="";
+                emps.forEach((programme) => {
+                    // console.log("masuk array:",programme);
+                    // const programmeTitle = programme.title;
+                    // if(docSnap.data().applied && Array.isArray(docSnap.data().applied)) {
+                    //     console.log(" masuk parti 3");
+                    var trow = document.createElement("tr");
+                    var td0 = document.createElement("td");
+                    var td1 = document.createElement("td");
+                    var td2 = document.createElement("td");
+
+                    // console.log(empList);
+                    empPrg.push([programme.name, programme.emp_id]);
+                    console.log("list emp: ", empPrg);
+                    td0.innerHTML = ++empNo;
+                    td1.innerHTML = programme.name;
+                    td2.innerHTML = programme.emp_id;
+
+                    trow.appendChild(td0);
+                    trow.appendChild(td1);
+                    trow.appendChild(td2);
+                    // console.log(emp_id);
+                    var ControlDiv = document.createElement("div");
+
+                    trow.appendChild(ControlDiv);
+                    tbody.appendChild(trow);
+                });
+            } else {
+                console.log("No employees found2");
+            }
         }
     });
 }
-
 
 function generateAllProgramCards(progList){
     progNo = 0;
@@ -385,7 +479,30 @@ function generateAllProgramCards(progList){
     progList.forEach(element => {
         generateProgramCards(element.data().title, element.data().category, element.data().introduction, element.data().description, element.data().imgUrl, element.data().sDate, element.data().eDate, element.data().pid);
     });
+    // progNo = 0;
+    // programCardsContainer.innerHTML = "";
+    // empProg.forEach(e => {
+    //     if (e.data().programmes && Array.isArray(e.data().programmes))
+    //     {
+    //         const programmes = e.data().programmes;
+    //         programmes.forEach((programme) => {
+    //             const programmeTitle = programme.title;
+    //             console.log("program titles: " + programmeTitle);
+    //             generateEmpProg(e.data().name, e.data().emp_id, programmeTitle);
+    //         });
+    //     } else {console.log("no programmes");}
+    // });
 }
+
+// var empProg = [];
+// const querySnapshot = await getDocs(collection(db, "employees"));
+// querySnapshot.forEach(async (doc) => {
+//     empProg.push(doc);
+//     console.log("Document: ",doc);
+// });
+// generateAllEmpProgramCards(empProg);
+
+
 
 const uploadPBtn = document.getElementById('uploadPBtn');
 const addP = document.getElementById('addP-button');
@@ -417,13 +534,13 @@ uploadPBtn.addEventListener('click',function(){
     {
         var temp = file.name.split('.');
         var ext = temp.slice((temp.length - 1), (temp.length));
-        alert(ext);
+        // alert(ext);
         return '.' + ext[0];
     }
 
     function GetFileName(file)
     {
-        alert("masuk getfilename");
+        // alert("masuk getfilename");
         var temp = file.name.split('.');
         var fname = temp.slice(0,-1).join('.');
         return fname;
@@ -497,13 +614,13 @@ addP.addEventListener('click',function(){
             description: description,
             sDate:sDate,
             eDate:eDate,
-            imgUrl: downloadURL,
+            imgUrl: downloadURL
         });
         // Retrieve the document ID
         const docId = docRef.id;
 
         // Update the document with the ID field
-        await updateDoc(docRef, { id: docId });
+        await updateDoc(docRef, { pid: docId });
         // console.log("Document written with ID: ", docRef.id);
         const addProgBtn = document.getElementById("addProgBtn");
         showModal(addProgBtn);
@@ -515,54 +632,52 @@ addP.addEventListener('click',function(){
 });
 
 
-var progEmpList = [];
-var tbody = document.getElementById("empProgTableBody");
-function generateEmpProg(name, emp_id, programmeTitle){
-    progEmpList.push([name, emp_id, programmeTitle]);
-    // var iempNo = 0;
-    var trow = document.createElement("tr");
-    var td0 = document.createElement("td");
-    var td1 = document.createElement("td");
-    var td2 = document.createElement("td");
-    var td3 = document.createElement("td");
-    // var td4 = document.createElement("td");
+// var progEmpList = [];
+// var tbody = document.getElementById("empProgTableBody");
+// function generateEmpProg(name, emp_id, programmeTitle){
+//     progEmpList.push([name, emp_id, programmeTitle]);
+//     // var iempNo = 0;
+//     var trow = document.createElement("tr");
+//     var td0 = document.createElement("td");
+//     var td1 = document.createElement("td");
+//     var td2 = document.createElement("td");
+//     var td3 = document.createElement("td");
+//     // var td4 = document.createElement("td");
 
-    // console.log(empList);
-    // td0.innerHTML = ++iempNo;
-    td1.innerHTML = name.toUpperCase();
-    td2.innerHTML = emp_id;
+//     // console.log(empList);
+//     // td0.innerHTML = ++iempNo;
+//     td1.innerHTML = name.toUpperCase();
+//     td2.innerHTML = emp_id;
 
-    td3.innerHTML = programmeTitle;
-    // td4.innerHTML = estatus;
+//     td3.innerHTML = programmeTitle;
+//     // td4.innerHTML = estatus;
 
-    // trow.appendChild(td0);
-    trow.appendChild(td1);
-    trow.appendChild(td2);
-    trow.appendChild(td3);
-    // trow.appendChild(td4);
+//     // trow.appendChild(td0);
+//     trow.appendChild(td1);
+//     trow.appendChild(td2);
+//     trow.appendChild(td3);
+//     // trow.appendChild(td4);
 
-    tbody.appendChild(trow);
-    // buttonListener(docid,ControlDiv,empList);
-}
-
-
-function generateAllEmpProgramCards(empProg){
-    progNo = 0;
-    programCardsContainer.innerHTML = "";
-    empProg.forEach(element => {
-        if (element.data().programmes && Array.isArray(element.data().programmes))
-        {
-            const programmes = element.data().programmes;
-            programmes.forEach((programme) => {
-                const programmeTitle = programme.title;
-                console.log("program titles: " + programmeTitle);
-                generateEmpProg(element.data().name, element.data().emp_id, programmeTitle);
-            });
-        } else {console.log("no programmes");}
-    });
-}
+//     tbody.appendChild(trow);
+//     // buttonListener(docid,ControlDiv,empList);
+// }
 
 
+// function generateAllEmpProgramCards(empProg){
+//     progNo = 0;
+//     programCardsContainer.innerHTML = "";
+//     empProg.forEach(element => {
+//         if (element.data().programmes && Array.isArray(element.data().programmes))
+//         {
+//             const programmes = element.data().programmes;
+//             programmes.forEach((programme) => {
+//                 const programmeTitle = programme.title;
+//                 console.log("program titles: " + programmeTitle);
+//                 generateEmpProg(element.data().name, element.data().emp_id, programmeTitle);
+//             });
+//         } else {console.log("no programmes");}
+//     });
+// }
 
 
 
@@ -575,6 +690,64 @@ function generateAllEmpProgramCards(empProg){
 
 
 
+
+
+    // applyButton?.addEventListener('click', async function() {        
+    //     //add in to employees document
+    //     const empRef = doc(db, "employees", currentUser.uid);
+    //     const progRef = doc(db, "programmes", pid);
+    //     const docSnap = await getDoc(progRef);
+
+    //     if (docSnap.exists()) {
+    //         const programme = {
+    //             title: docSnap.data().title,
+    //             category: docSnap.data().category
+    //         };
+    //         updateDoc(empRef, {
+    //             'programmes': arrayUnion(programme)
+    //         })
+    //         .then(() => {
+    //             console.log("programmes has been updated successfully");
+
+    //             const applyProgBtn = document.getElementById("applyProgBtn");
+    //             showModal(applyProgBtn);
+    //             function showModal(element) {
+    //                 element.click();
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log('Error adding new programme:', error);
+    //         });
+    //     }
+    // });
+
+    // delProgButton?.addEventListener('click', async function() {        
+    //     //add in to employees document
+        // const progRef = doc(db, "programmes", pid);
+        // const docSnap = await getDoc(progRef);
+        // const newProgrammes = docSnap.data().title;
+        // console.log("Programmes to be deleted: " + docSnap.title);
+        // if (docSnap.exists()) {
+        //     console.log("Programmes to be deleted: " + docSnap.title);
+
+        //     deleteDoc(progRef)
+        //     .then(() => {
+        //         const delProgBtn = document.getElementById("DelProgBtn");
+        //         showModal(delProgBtn);
+        //         function showModal(element) {
+        //             element.click();
+        //         }
+        //         // alert("Programme has been deleted successfully");
+        //     })
+        //     .catch(error => {
+        //         console.log("Error deleting programme: ", error);
+        //     })
+        // }
+        // else {
+        //     // doc.data() will be undefined in this case
+        //     console.log("No such document!");
+        // }
+    // });
 
 
 

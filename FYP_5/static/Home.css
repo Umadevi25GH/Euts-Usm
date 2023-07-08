@@ -31,7 +31,7 @@ html{
   position: fixed;
   width: 100%;
   /* z-index: 997; */
-  z-index: 100;
+  /* z-index: 100; */
   padding: 10px;
   /* margin-bottom: 50px; */
   
@@ -100,7 +100,7 @@ html{
 }
 
 .nav-pills .nav-link.active1 {
-  background-color: #048ED9;
+  background-color: #2e6380;
   color: black;
 }
 
@@ -112,7 +112,7 @@ html{
 }
 
 .nav-pills .nav-link:hover{
-  background-color: #048ED9;
+  background-color: #2e6380;
   color: black;
   text-align: center;
 }
@@ -218,9 +218,13 @@ footer p {
   color: whitesmoke;
 }
 
-.bi-linkedin, .bi-github, .bi-diamond, .bi-file-earmark-arrow-down, .fa-gitlab{
-  color: #ffffff;
-  size: 50%;
+.form-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /*--------------------------------------------------------------
@@ -505,45 +509,6 @@ section {
     display: inline-block;
   }
 }
-
-
-/*--------------------------------------------------------------
-# Services
---------------------------------------------------------------*/
-.services .icon-box {
-  margin-bottom: 20px;
-  padding: 30px;
-  border-radius: 6px;
-}
-
-.services .icon-box i {
-  float: left;
-  color: #d9232d;
-  font-size: 40px;
-}
-
-.services .icon-box h4 {
-  margin-left: 70px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-.services .icon-box h4 a {
-  color: #556270;
-  transition: 0.3s;
-}
-
-.services .icon-box p {
-  margin-left: 70px;
-  line-height: 24px;
-  font-size: 14px;
-}
-
-.services .icon-box:hover h4 a {
-  color: #d9232d;
-}
-
 
 
 /*--------------------------------------------------------------

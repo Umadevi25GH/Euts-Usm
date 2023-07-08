@@ -763,11 +763,35 @@ addUser?.addEventListener("click", function(){
         }).then(
           message => alert(message)
         );
-        const successEmpBtn = document.getElementById("successEmpBtn");
+        // const successEmpBtn = document.getElementById("successEmpBtn");
+        // showSuccessModal();
+        // // Function to show the success modal
+        // function showSuccessModal() {
+        //     successEmpBtn.click();
+        // }
+        const fileModal = new bootstrap.Modal(document.getElementById("emp-modal"));
+        fileModal.show();
+        
+        const successEmp = new bootstrap.Modal(document.getElementById("successEmp"));
         showSuccessModal();
-        // Function to show the success modal
         function showSuccessModal() {
-            successEmpBtn.click();
+        // fileModal.remove(); // Hide the file-modal
+        successEmp.show(); // Show the successEnc modal
+        }
+        
+
+        // Add a delay of 3 seconds (3000 milliseconds) before hiding the modal
+        setTimeout(function() {
+        fileModal.hide();
+        removeModalBackdrop();
+        }, 3000);
+
+        // Function to remove the modal backdrop
+        function removeModalBackdrop() {
+        const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+        modalBackdrops.forEach(backdrop => {
+            backdrop.parentNode.removeChild(backdrop);
+        });
         }
     })
     .catch((error) => {

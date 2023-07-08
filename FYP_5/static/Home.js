@@ -12,55 +12,72 @@ login.addEventListener("click", function(){
       const user = userCredential.user;
       // alert(`${user.email} logged in`);
 
-      sessionStorage.setItem('currentUser', JSON.stringify(user));
-      userLogin(user);
+      // sessionStorage.setItem('currentUser', JSON.stringify(user));
+      // userLogin(user);
 
       const uid = user.uid;
       const docRef=doc(db, "employees", uid);
       const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()  && docSnap.data().estatus == "Active") {
+      if (docSnap.data().estatus == "Active") {
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        // userLogin(user);
         if (docSnap.data().role == "Admin") {
             // sessionStorage.setItem('userRole', 'Admin');
+            // sessionStorage.setItem('currentUser', JSON.stringify(user));
+            // userLogin(user);
             window.location = "Aprofile.html";
         }
         else {
             // sessionStorage.setItem('userRole', 'Employee');
+            // sessionStorage.setItem('currentUser', JSON.stringify(user));
+            // userLogin(user);
             window.location = "profile.html";
         }
       } else {
         // alert("You're not belong to this system. CONTACT ADMIN!");
         const inactiveBtn = document.getElementById("inactiveBtn");
-        showSuccessModal();
+        showSuccessModal(inactiveBtn);
         // Function to show the success modal
-        function showSuccessModal() {
-            inactiveBtn.click();
+        // function showSuccessModal() {
+        //     inactiveBtn.click();
+        //     // window.location = "Home.html";
+        // }
+        function showSuccessModal(element) {
+          element.click();
         }
       }
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert("Error: " + errorMessage);
+      console.log("Error: " + errorMessage + errorCode);
     });
 });
 
-function userLogin(user) {
-  console.log("In userLogin");
-  const uid = user.uid;
-  const docRef = doc(db, "employees", uid);
 
-  getDoc(docRef)
-    .then((docSnap) => {
-      console.log("Current User:", docSnap.data().name);
-      if (docSnap.exists()) {
-        document.getElementById("name1").innerText = docSnap.data().name;
-      }
-    })
-    .catch((error) => {
-      console.log("Error retrieving user details:", error);
-    });
-}
+
+// function userLogin(user) {
+//   console.log("In userLogin");
+//   const uid = user.uid;
+//   const docRef = doc(db, "employees", uid);
+
+//   getDoc(docRef)
+//     .then((docSnap) => {
+//       console.log("Current User:", docSnap.data().name);
+//       if (docSnap.exists()) {
+//         if(docSnap.data().estatus === "Active") {
+//           document.getElementById("name1").innerHTML = docSnap.data().name;
+//         }
+//         else {
+//           console.log("Inactive User:", docSnap.data().name);
+//         }
+//       }
+//     })
+//     .catch((error) => {
+//       console.log("Error retrieving user details:", error);
+//     });
+// }
 
 
 // Reset password link start
