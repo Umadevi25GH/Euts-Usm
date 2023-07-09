@@ -124,81 +124,95 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
     progList.push([title, category, introduction, description, imgUrl, eDate, sDate, pid]);
     console.log(progList);
 
-    // Create card element col
     const card = document.createElement("div");
-    // card.className = "project-container py-1 my-3 mx-3 col-md-4";
-    card.className = " project-container col-md-4";
+    card.className = "card col-md-4 p-4 cardProg";
 
     // Create card body
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+    const cardTop = document.createElement("div");
+    cardTop.className = "row cardTop";
+    
+    const cardT1 = document.createElement("div");
+    cardT1.className = "col-md-10 cardTitle";
 
+    const cardContent = document.createElement("div");
+    cardContent.className = "row-md-3 mb-2 cardContent";
+
+    // const cardBottom = document.createElement("div");
+    // cardBottom.className = "row-md-3 mb-0 cardBottom align-items-end";    
+    const cardBottom = document.createElement("div");
+    cardBottom.className = "cardBottom mt-auto";
+    
+    
     // Create card title
-    const cardTitle = document.createElement("h3");
-    cardTitle.className = "card-title";
+    const cardTitle = document.createElement("h6");
+    cardTitle.className = "card-title fw-bolder fw-uppercase";
     cardTitle.textContent = title.toUpperCase();
 
+    // cardTitle.textContent = title.toUpperCase();
+
     // Create card category
-    const cardCategory = document.createElement("p");
+    const cardCategory = document.createElement("h6");
     cardCategory.className = "card-text";
-    cardCategory.textContent = "Category: " + category;
-
-
-    // Create card introduction
-    const cardIntro = document.createElement("h5");
-    cardIntro.className = "card-text";
-    cardIntro.textContent = introduction;
+    cardCategory.textContent = "Category: " +category;
 
     // Create card description
-    const cardDescription = document.createElement("h5");
+    const cardDescription = document.createElement("h6");
     cardDescription.className = "card-text";
     cardDescription.textContent = description;
 
+    // Create card introduction
+    const cardIntro = document.createElement("h6");
+    cardIntro.className = "card-text";
+    cardIntro.textContent = introduction;
+
     // Create card image
     const cardImage = document.createElement("img");
-    // cardImage.className = "card-text";
+    cardImage.className = "card-img";
     cardImage.src = imgUrl;
 
     // Create card sDate
     const cardsDate = document.createElement("p");
     cardsDate.className = "card-text";
-    cardsDate.textContent = sDate;
+    cardsDate.textContent ="Start Date: " + sDate;
 
     // Create card eDate
     const cardeDate = document.createElement("p");
     cardeDate.className = "card-text";
-    cardeDate.textContent = eDate;
+    cardeDate.textContent ="End Date: " + eDate;
+
 
     // Create card button to trigger modal
     const cardButton = document.createElement("button");
-    cardButton.className = "btn1";
+    cardButton.className = "btn1 px-2 py-2";
+    cardButton.id = "cardButton";
     cardButton.textContent = "Learn More";
     
     // Create card button to Apply
     const applyButton = document.createElement("button");
-    applyButton.className = "btn1";
+    applyButton.className = "btn1 px-2 py-2 applyBtn";
+    applyButton.id = pid;
     applyButton.textContent = "Apply";
 
-    // Create card button to Apply
-    // const delProgButton = document.createElement("button");
-    // delProgButton.className = "btn1";
-    // delProgButton.textContent = "Remove";
-    
     // Append elements to card body
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardCategory);
-    cardBody.appendChild(cardIntro);
-    // cardBody.appendChild(cardImage);
+    cardT1.appendChild(cardTitle);
+    cardTop.appendChild(cardT1);
 
+    cardContent.appendChild(cardCategory);
+    cardContent.appendChild(cardIntro);
+    
     // cardBody.appendChild(cardDescription);
     
-    cardBody.appendChild(cardButton);
-    cardBody.appendChild(applyButton);
-    // cardBody.appendChild(delProgButton);
+    cardBottom.appendChild(cardButton);
+    cardBottom.appendChild(applyButton);
 
     // Append card body to card
-    card.appendChild(cardBody);
+    card.appendChild(cardTop);
+    card.appendChild(cardContent);
 
+    card.appendChild(cardBottom);
+
+    // buttonListener(pid, cardBottom);
+    // cards.push(card);
     // Get the programCards container
     const programCardsContainer = document.getElementById("programCards");
 

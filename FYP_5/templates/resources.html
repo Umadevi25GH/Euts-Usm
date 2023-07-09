@@ -46,7 +46,36 @@
   </div>
 </header><!-- End Header -->
 <body>
-  <div clas="container-fluid row col-lg-10">
+  <div class="container-fluid col-lg-10">
+    <div class="container-project px-3 py-5 row mt-3">
+      <h1 class="mb-0 pb-0">Resources</h1>
+      <h6> Latest list of resources to refer.</h6>
+    </div>
+    <div class="container-fluid px-3 row">
+      <table class="table table-responsive" id="pdfTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Document Title</th>
+            <th>Contributor</th>
+            <th>
+              <div class="d-flex align-items-center">
+                <span>Date</span>
+                <div class="sort-icons ms-2 d-flex flex-column">
+                  <span id="sortIconAsc" class="fa fa-sort-asc" aria-hidden="true"></span>
+                  <span id="sortIconDesc" class="fa fa-sort-desc" aria-hidden="true"></span>
+                </div>
+              </div>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody1">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- <div clas="container-fluid row col-lg-10">
     <div class="container-project px-3 py-5 row mt-5">
       <h1 class="mb-0 pb-0">Resources</h1>
       <h6> Below are latest list of resources to refer.</h6>
@@ -60,14 +89,13 @@
             <th>Contributor</th>
             <th>Date</th>
             <th>Actions</th>
-            <!-- <th>Database ID</th> to be remove later -->
           </tr>
         </thead>
         <tbody id="tbody1">
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 <!-- <div class="container w-75 h-50">
   <h1>Resources</h1>
   <table class="table table-responsive">

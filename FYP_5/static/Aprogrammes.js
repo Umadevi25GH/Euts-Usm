@@ -169,11 +169,14 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         cardT1.className = "col-md-10 cardTitle";
 
         const cardContent = document.createElement("div");
-        cardContent.className = "row-md-3 cardContent";
+        cardContent.className = "row-md-3 mb-2 cardContent";
 
+        // const cardBottom = document.createElement("div");
+        // cardBottom.className = "row-md-3 mb-0 cardBottom align-items-end";    
         const cardBottom = document.createElement("div");
-        cardBottom.className = "row-md-3 mt-3 cardBottom";    
-
+        cardBottom.className = "cardBottom mt-auto";
+        
+        
         // Create card title
         const cardTitle = document.createElement("h6");
         cardTitle.className = "card-title fw-bolder fw-uppercase";
@@ -254,6 +257,7 @@ function generateProgramCards(title,category,introduction,description,imgUrl,eDa
         // Append card body to card
         card.appendChild(cardTop);
         card.appendChild(cardContent);
+
         card.appendChild(cardBottom);
 
         buttonListener(pid, cardBottom);

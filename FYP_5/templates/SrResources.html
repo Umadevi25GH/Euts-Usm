@@ -54,13 +54,21 @@
     </div>
     <div class="container-project my-5 px-3 py-5 col mt-5">
       <div class="row">
-        <table class="table table-responsive">
+        <table class="table table-responsive" id="pdfTable">
           <thead>
             <tr>
               <th>No</th>
               <th>Document Title</th>
               <th>Contributor</th>            
-              <th>Date</th>
+              <th>
+                <div class="d-flex align-items-center">
+                  <span>Date</span>
+                  <div class="sort-icons ms-2 d-flex flex-column">
+                    <span id="sortIconAsc" class="fa fa-sort-asc" aria-hidden="true"></span>
+                    <span id="sortIconDesc" class="fa fa-sort-desc" aria-hidden="true"></span>
+                  </div>
+                </div>
+              </th>
               <th>Actions</th>
               <!-- <th>Database ID</th> to be remove later -->
             </tr>

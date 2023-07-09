@@ -475,9 +475,9 @@ async function fetchEmployees1() {
             carouselItems += `
                 <div class="carousel-item ${activeClass}">
                     <img src="${employee.imageUrl}" class="d-block w-100" alt="${employee.name}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>${employee.name}</h3>
-                        <p>${employee.role}</p>
+                    <div class="carousel-caption d-none d-md-flex flex-column justify-content-end align-items-center">
+                        <h4>${employee.name}</h4>
+                        <h6>${employee.role}</h6>
                     </div>
                 </div>
             `;

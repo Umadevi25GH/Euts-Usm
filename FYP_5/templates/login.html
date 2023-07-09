@@ -53,8 +53,8 @@
   
 <body>
 
-<div class="container-fluid col-lg-10 pt-5">
-    <div class="row" style="border-radius: 8%; box-shadow: 0 5px 20px rgba(14, 14, 14, 0.1);">
+<div class="container-fluid col-lg-10 pt-5" id="loginBg">
+    <div class="row" style="border-radius: 8%; box-shadow: 0 5px 20px rgba(14, 14, 14, 0.1); background-image: url(/FYP_5/images/img/slide/slide-2.jpg);">
         <!-- Left column for company logo -->
         <div class="col-md-5 d-flex align-items-center justify-content-center">
             <img src="/FYP_5/static/logoBnW (6).png" alt="Company Logo" class="img-fluid">
@@ -63,7 +63,7 @@
         <!-- Right column for login form -->
         <div class="col-md-6 pt-5 my-3">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+              <div class="col-md-6 offset-md-3">
                 <form class="form-container">
                     <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -76,8 +76,7 @@
                     <div class="text-center">
                     <button type="button" id="login" class="btn1">Login</button>
                     </div>
-                </form>
-                </div>
+                
                 <div class="text-center mt-3">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#forget-password-modal" class="text-decoration-none">Forgot Password</a>
                 </div>
@@ -85,6 +84,8 @@
                     Don't have an account? </br>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#newAcc-modal" class="text-decoration-none">Contact admin</a>
                 </div>
+              </form>
+            </div>
             </div>
         </div>
         </div>

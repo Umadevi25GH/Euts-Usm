@@ -177,6 +177,56 @@ async function AddItemToTable(pdfName, pdfUrl, uploadBy, date, secret_key, docid
     // buttonListenerDel(docid) ;
 }
 
+// sorting the the table by date
+// Get the table element
+const table = document.getElementById("pdfTable");
+
+// Get the table header
+const header = table.querySelector("thead tr th:nth-child(4)");
+
+// Get the sort icon element
+// Get the sort icons
+const sortIconAsc = document.getElementById("sortIconAsc");
+const sortIconDesc = document.getElementById("sortIconDesc");
+
+// Set initial sorting direction
+let ascending = true;
+
+// Add click event listener to the header
+header.addEventListener("click", () => {
+  // Toggle sorting direction
+  console.log("Sorting direction");
+  ascending = !ascending;
+  
+//   // Update sort icon based on sorting direction
+//   sortIcon.classList.toggle("fa-sort-asc", ascending);
+//   sortIcon.classList.toggle("fa-sort-desc", !ascending);
+
+  // Toggle visibility of sort icons based on sorting direction
+  sortIconAsc.style.display = ascending ? "inline" : "none";
+  sortIconDesc.style.display = ascending ? "none" : "inline";
+  
+  // Get the table rows
+  const rows = Array.from(table.querySelectorAll("#tbody1 tr"));
+
+  // Sort the rows by date
+    rows.sort((a, b) => {
+        const dateA = new Date(a.cells[3].textContent);
+        const dateB = new Date(b.cells[3].textContent);
+        return ascending ? dateA - dateB : dateB - dateA;
+    });
+  
+
+  // Clear the table body
+  table.tBodies[0].innerHTML = "";
+
+  // Append sorted rows to the table
+  rows.forEach(row => table.tBodies[0].appendChild(row));
+});
+
+// sorting the table by date ends
+
+
 function AddAllItemsToTheTable(PdfList){
     pdfNo = 0;
     tbody1.innerHTML="";

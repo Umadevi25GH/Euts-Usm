@@ -31,7 +31,7 @@
 <header id="header" class="sticky-top">
   <div class="container d-flex align-items-center">
       <img src="/FYP_5/static/logoBnW (1).png" alt="logoBnW">
-      <div class="username">Welcome,<strong><span id="name1">Umadevi</span></strong></div>
+      <div class="username">Welcome,<span id="name1">Umadevi</span></strong></div>
       <ul class = "nav nav-pills ms-auto">
           <li class="nav-item">
               <a href="#" class="nav-link text" id="nav-link-profile">Profile</a>
@@ -54,16 +54,31 @@
   <div class="container-fluid col-lg-10">
     <div class="container-project px-3 py-5 row mt-3">
       <h1 class="mb-0 pb-0">Resources</h1>
-      <h6> Below are latest list of resources to refer.</h6>
+      <h6> Latest list of resources to refer.</h6>
     </div>
+    <!-- <div class="container-project px-3 py-1 row mt-3">
+      <span>
+        Sort
+        <span id="sortIcon" class="fa fa-sort" aria-hidden="true"></span>
+      </span>
+    </div>     -->
     <div class="container-fluid px-3 row">
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="pdfTable">
       <thead>
         <tr>
           <th>No</th>
           <th>Document Title</th>
           <th>Encrypted URL</th>
           <th>Contributor</th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span>Date</span>
+              <div class="sort-icons ms-2 d-flex flex-column">
+                <span id="sortIconAsc" class="fa fa-sort-asc" aria-hidden="true"></span>
+                <span id="sortIconDesc" class="fa fa-sort-desc" aria-hidden="true"></span>
+              </div>
+            </div>
+          </th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -185,12 +200,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-<!-- Button to trigger the encrypt modal end-->
+<!-- Button to trigger the encrypt modal end -->
 
 
 

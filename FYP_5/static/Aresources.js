@@ -1,5 +1,5 @@
 import { storage, app, auth, db } from "./index.js";
-import { doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { doc, query, orderBy, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 import { ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject, getStorage } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
 
@@ -32,7 +32,9 @@ async function displayEmp(currentUser){
     // https://firebase.google.com/docs/reference/js/firebase.User
     var pdf = [];
 
-    const querySnapshot = await getDocs(collection(db, "pdf"));
+    // const querySnapshot = await getDocs(collection(db, "pdf"));
+    const querySnapshot = await getDocs(query(collection(db, "pdf"), orderBy("pdfName")));
+
     querySnapshot.forEach(async (doc) => {
         pdf.push(doc);
         // console.log(pdf);
@@ -135,7 +137,7 @@ var pdfNo = 0;
 var tbody1 = document.getElementById("tbody1");
 var PdfList = [];
 
-async function AddItemToTable(pdfName, pdfUrl, uploadBy, docid, secretKeyString){
+async function AddItemToTable(pdfName, pdfUrl, uploadBy, date, docid, secretKeyString){
     var trow = document.createElement("tr");
     var td0 = document.createElement("td");
     var td1 = document.createElement("td");
@@ -143,21 +145,21 @@ async function AddItemToTable(pdfName, pdfUrl, uploadBy, docid, secretKeyString)
     td2.style.overflowWrap = "break-word"; // Enable wrapping of long URLs
     td2.style.wordBreak = "break-all"; // Additional style for wider browser support
     var td3 = document.createElement("td");
-    // var td4 = document.createElement("td");
+    var td4 = document.createElement("td");
 
-    PdfList.push([pdfName, pdfUrl, uploadBy, docid]);
+    PdfList.push([pdfName, pdfUrl, uploadBy, date, docid]);
     // console.log(PdfList);
     td0.innerHTML = ++pdfNo;
     td1.innerHTML = pdfName;
     td2.innerHTML = pdfUrl;
     td3.innerHTML = uploadBy;
-    // td4.innerHTML = docid;
+    td4.innerHTML = date;
 
     trow.appendChild(td0);
     trow.appendChild(td1);
     trow.appendChild(td2);
     trow.appendChild(td3);
-    // trow.appendChild(td4);
+    trow.appendChild(td4);
     // console.log(docid);
     var ControlDiv = document.createElement("div");
     
@@ -181,10 +183,58 @@ function AddAllItemsToTheTable(PdfList){
     pdfNo = 0;
     tbody1.innerHTML="";
     PdfList.forEach(element => {
-        AddItemToTable(element.data().pdfName, element.data().pdfUrl, element.data().uploadBy, element.id);
+        AddItemToTable(element.data().pdfName, element.data().pdfUrl, element.data().uploadBy, element.data().date, element.id);
     });
 }
 
+// sorting the the table by date
+// Get the table element
+const table = document.getElementById("pdfTable");
+
+// Get the table header
+const header = table.querySelector("thead tr th:nth-child(5)");
+
+// Get the sort icon element
+// Get the sort icons
+const sortIconAsc = document.getElementById("sortIconAsc");
+const sortIconDesc = document.getElementById("sortIconDesc");
+
+// Set initial sorting direction
+let ascending = true;
+
+// Add click event listener to the header
+header.addEventListener("click", () => {
+  // Toggle sorting direction
+  console.log("Sorting direction");
+  ascending = !ascending;
+  
+//   // Update sort icon based on sorting direction
+//   sortIcon.classList.toggle("fa-sort-asc", ascending);
+//   sortIcon.classList.toggle("fa-sort-desc", !ascending);
+
+  // Toggle visibility of sort icons based on sorting direction
+  sortIconAsc.style.display = ascending ? "inline" : "none";
+  sortIconDesc.style.display = ascending ? "none" : "inline";
+  
+  // Get the table rows
+  const rows = Array.from(table.querySelectorAll("#tbody1 tr"));
+
+  // Sort the rows by date
+    rows.sort((a, b) => {
+        const dateA = new Date(a.cells[4].textContent);
+        const dateB = new Date(b.cells[4].textContent);
+        return ascending ? dateA - dateB : dateB - dateA;
+    });
+  
+
+  // Clear the table body
+  table.tBodies[0].innerHTML = "";
+
+  // Append sorted rows to the table
+  rows.forEach(row => table.tBodies[0].appendChild(row));
+});
+
+// sorting the table by date ends
 
 // RESOURCE UPLOADING AND RETRIEVAL START
 

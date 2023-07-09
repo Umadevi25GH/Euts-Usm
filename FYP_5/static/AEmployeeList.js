@@ -1,7 +1,7 @@
 import { storage, app, auth, db } from "./index.js";
 // import { getAuth, deleteUser } from "firebase-admin/auth";
 // import { auth1, firestore} from "./server.js"
-import { doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { orderBy, query, doc, getDoc, getDocs, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 // import { onAuthStateChanged, signOut, deleteUser, getAuth, createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 // import { ref as sRef, uploadBytesResumable, getDownloadURL, deleteObject, getStorage } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
 import { signOut, createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
@@ -40,11 +40,10 @@ async function displayEmp(currentUser){
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     var emp = [];
-
-    const querySnapshot = await getDocs(collection(db, "employees"));
+    const querySnapshot = await getDocs(query(collection(db, "employees"), orderBy("name")));
+    // const querySnapshot = await getDocs(collection(db, "employees"));
     querySnapshot.forEach(async (doc) => {
         emp.push(doc);
-        // console.log(doc);
     });
     // console.log(emp);
     AddAllItemsToTheTable(emp);

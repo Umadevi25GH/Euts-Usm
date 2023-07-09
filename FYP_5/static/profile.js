@@ -135,7 +135,7 @@ async function displayEmp(currentUser){
         const uploadTask = uploadBytesResumable(storageRef, imgToUpload, metaData);
         uploadTask.on('state-changed',(snapshot) => {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            proglab.innerHTML = "uploading " +  progress + "%";
+            // proglab.innerHTML = "uploading " +  progress + "%";
         },
         (error) => {
             alert("error: img not uploaded");

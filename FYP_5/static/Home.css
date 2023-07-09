@@ -128,7 +128,9 @@ html{
   }
 }
 
-
+.loginBg {
+  background-image: url"(/FYP_5/images/img/slide/slide-2.jpg)";
+}
 .btn1 {
   background-color: #024366;
   color: #fff;
